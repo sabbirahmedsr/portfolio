@@ -3,7 +3,7 @@
     Description: Handles rendering the main project gallery view into the app container.
 ************************************************************/
 
-import { appContainer, masterProjectList, views } from './app.js';
+import { appContainer, masterProjectList, views, currentCategory } from './app.js';
 import { initQuickLookModal, renderQuickLook } from './quicklook.js';
 import { inferMediaType, parseDate } from './utils.js'; // Import inferMediaType and parseDate
 
@@ -33,14 +33,14 @@ function getPlatformIcon(platform) {
 /**
  * Renders the Gallery View.
  */
-export function renderGalleryView(filteredList = masterProjectList) {
+export function renderGalleryView(filteredList = masterProjectList, filterState = { year: 'all', platform: 'all' }) {
     appContainer.innerHTML = views.gallery;
     
     if (!document.getElementById('quick-look-modal')) {
         initQuickLookModal();
     }
 
-    populateFilters();
+    populateFilters(filterState);
 
     const gridContainer = document.getElementById('project-grid');
     if (!gridContainer) return;
@@ -97,12 +97,30 @@ export function renderGalleryView(filteredList = masterProjectList) {
             renderQuickLook(e.currentTarget.dataset.id);
         });
     });
+
+    const unityBtn = document.getElementById('unity-portfolio-btn');
+    const blenderBtn = document.getElementById('blender-portfolio-btn');
+
+    if (currentCategory === 'unity') {
+        unityBtn.classList.add('active');
+        blenderBtn.classList.remove('active');
+    } else {
+        blenderBtn.classList.add('active');
+        unityBtn.classList.remove('active');
+    }
+
+    const platformFilterGroup = document.getElementById('platform-filter-group');
+    if (currentCategory === 'blender') {
+        platformFilterGroup.style.display = 'none';
+    } else {
+        platformFilterGroup.style.display = 'flex';
+    }
 }
 
 /**
  * Populates filter dropdowns and attaches event listeners.
  */
-function populateFilters() {
+function populateFilters(filterState = { year: 'all', platform: 'all' }) {
     const yearFilter = document.getElementById('filter-year');
     const platformFilter = document.getElementById('filter-platform');
     const searchInput = document.getElementById('search-input');
@@ -124,10 +142,15 @@ function populateFilters() {
         platformFilter.add(option);
     });
 
+    yearFilter.value = filterState.year;
+    platformFilter.value = filterState.platform;
+
     const applyFilters = () => {
         const selectedYear = yearFilter.value;
         const selectedPlatform = platformFilter.value;
         const searchTerm = searchInput.value.toLowerCase();
+
+        const filterState = { year: selectedYear, platform: selectedPlatform };
 
         let filteredList = masterProjectList;
 
@@ -149,7 +172,7 @@ function populateFilters() {
             );
         }
 
-        renderGalleryView(filteredList);
+        renderGalleryView(filteredList, filterState);
     };
 
     [yearFilter, platformFilter].forEach(el => el.addEventListener('change', applyFilters));

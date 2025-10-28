@@ -1,0 +1,10 @@
+[
+    {
+        "id": "dining-room",
+        "projectConfigPath": "Dining Room/config.json"
+    },
+    {
+        "id": "low-poly-hut",
+        "projectConfigPath": "Low Poly Hut/config.json"
+    }
+]

@@ -1,0 +1,34 @@
+{
+    "title": "Low Poly Hut",
+    "tagline": "A low poly hut scene.",
+    "shortDescription": "A 3D model of a low poly hut, created with Blender.",
+    "previewImage": "./render-01.png",
+    "client": "Personal Project",
+    "platforms": ["Blender"],
+    "InitiationDate": "01-01-2025",
+    "DevStartDate": "01-01-2025",
+    "DevEndDate": "01-01-2025",
+    "blenderVersion": "4.0",
+    "techStack": ["Blender", "Cycles Render"],
+    "media": [
+        {
+            "url": "./render-01.png",
+            "alt": "Low Poly Hut Render 1"
+        },
+        {
+            "url": "./render-02.png",
+            "alt": "Low Poly Hut Render 2"
+        },
+        {
+            "url": "./render-03.png",
+            "alt": "Low Poly Hut Render 3"
+        }
+    ],
+    "externalLinks": [
+        {
+            "label": "YouTube",
+            "url": "https://www.youtube.com/watch?v=hS-VcF18P98&list=PLvOCw58Onf4Pojn5HeFsnU3EEbD_ehLeW",
+            "iconClass": "fab fa-youtube"
+        }
+    ]
+}

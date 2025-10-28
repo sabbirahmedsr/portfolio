@@ -5,7 +5,7 @@
     "previewImage": "./preview.png",    
 
     "client": "Training Solutions Inc.", 
-    "platforms": ["Meta Quest 2", "Meta Quest 3"],
+    "platforms": ["Meta Quest", "VR"],
     
     "InitiationDate": "15-01-2023",
     "DevStartDate": "01-02-2023",

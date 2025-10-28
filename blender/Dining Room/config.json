@@ -1,0 +1,51 @@
+{
+    "title": "Dining Room",
+    "tagline": "A realistic dining room scene.",
+    "shortDescription": "A detailed 3D model of a dining room, created with Blender.",
+    "previewImage": "./render-dining-room-main.jpg",
+    "client": "Personal Project",
+    "platforms": ["Blender"],
+    "InitiationDate": "01-01-2025",
+    "DevStartDate": "01-01-2025",
+    "DevEndDate": "01-01-2025",
+    "blenderVersion": "4.0",
+    "techStack": ["Blender", "Cycles Render"],
+    "media": [
+        {
+            "url": "./render-dining-room-main.jpg",
+            "alt": "Dining Room Main Render"
+        },
+        {
+            "url": "./render-clay.jpg",
+            "alt": "Clay Render"
+        },
+        {
+            "url": "./render-closup-render.jpg",
+            "alt": "Closeup Render"
+        },
+        {
+            "url": "./render-interior-tree.jpg",
+            "alt": "Interior Tree"
+        },
+        {
+            "url": "./render-light-show.jpg",
+            "alt": "Light Show"
+        },
+        {
+            "url": "./render-table-top.jpg",
+            "alt": "Table Top"
+        }
+    ],
+    "externalLinks": [
+        {
+            "label": "ArtStation",
+            "url": "https://www.artstation.com/artwork/R38mxE",
+            "iconClass": "fab fa-artstation"
+        },
+        {
+            "label": "YouTube",
+            "url": "https://www.youtube.com/watch?v=K24Ctrx0k0k&list=PLvOCw58Onf4N6rU9f6DnofNBZLD8ydrBm",
+            "iconClass": "fab fa-youtube"
+        }
+    ]
+}

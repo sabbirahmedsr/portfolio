@@ -6,6 +6,7 @@
 .main-header {
     display: flex;
     align-items: center;
+    flex-wrap: wrap; /* Allow items to wrap on smaller screens */
     justify-content: space-between;
     padding: var(--spacing-xs) 0; /* Reduced vertical padding */
     border-radius: var(--border-radius-md);
@@ -16,7 +17,7 @@
 .header-branding {
     display: flex;
     align-items: center;
-    gap: var(--spacing-sm); /* Reduced gap between logo and title */
+    gap: var(--spacing-lg); /* Increased gap */
 }
 
 .logo-button {
@@ -122,6 +123,11 @@
     appearance: none;
 }
 
+.header-filters select option {
+    background: var(--color-bg-card);
+    color: var(--color-text-light);
+}
+
 .project-card-wrapper {
     position: relative;
     /* Inherits background, border-radius, box-shadow, and hover effects from base.css */
@@ -193,6 +199,35 @@
 
 .card-meta i {
     color: var(--color-secondary-accent);
+}
+
+.header-portfolio-switcher {
+    display: flex;
+    gap: var(--spacing-md); /* Increased gap for better separation */
+}
+
+.portfolio-btn {
+    background-color: transparent;
+    color: var(--color-text-muted);
+    border: none;
+    border-bottom: 2px solid transparent; /* Inactive state */
+    border-radius: 0;
+    padding: 0.8rem 0.2rem; /* Adjusted padding */
+    font-size: 1.1rem; /* Larger font size */
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    margin-bottom: -1px; /* Align with the parent's bottom border */
+}
+
+.portfolio-btn.active {
+    color: var(--color-text-light);
+    border-bottom: 2px solid var(--color-primary-accent);
+}
+
+.portfolio-btn:hover:not(.active) {
+    color: var(--color-text-light);
+    border-bottom: 2px solid var(--color-secondary-accent);
 }
 
 /* --- Responsiveness --- */

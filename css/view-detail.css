@@ -2,6 +2,10 @@
     View: Project Detail (Asset Store Layout)
     ========================================================================== */
 
+#detail-view {
+    padding-top: var(--spacing-lg);
+}
+
 .detail-grid-layout {
     display: grid;
     grid-template-columns: minmax(0, 2.5fr) 1fr; /* Reduced width of main content column */

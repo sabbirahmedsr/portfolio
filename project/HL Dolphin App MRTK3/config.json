@@ -2,7 +2,7 @@
     "title": "HL Dolphin App MRTK3",
     "tagline": "Augmented Reality app for HoloLens 2.",
     "shortDescription": "An interactive HoloLens 2 application featuring a virtual dolphin. This project is built with Unity and MRTK3, and includes several interactive experiences such as fish feeding, bubble popping, and more.",
-    "previewImage": "./preview.PNG",
+    "previewImage": "./preview.png",
     
     "features": [
         "Immersive Virtual Dolphin: A fully animated dolphin that interacts realistically with the mixed-reality environment.",
@@ -34,7 +34,7 @@
     
     "media": [
         {
-            "url": "./preview.PNG", 
+            "url": "./preview.png", 
             "alt": "Main project screenshot showing the virtual dolphin and the mixed-reality environment."
         },
         {

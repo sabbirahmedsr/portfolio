@@ -1,0 +1,21 @@
+<section id="gallery-view">
+    <h1 class="page-title">Project Showcase</h1>
+    <p class="page-subtitle">A collection of systems and tools developed in Unity and other platforms.</p>
+    
+    <div id="filter-bar" class="filter-bar">
+        <label for="filter-year">Year:</label>
+        <select id="filter-year" onchange="applyFilters()">
+            <option value="all">All Years</option>
+            </select>
+        
+        <label for="filter-platform">Platform:</label>
+        <select id="filter-platform" onchange="applyFilters()">
+            <option value="all">All Platforms</option>
+            </select>
+        
+        <input type="text" id="search-input" placeholder="Search projects..." onkeyup="applyFilters()">
+    </div>
+
+    <div id="project-grid" class="project-grid-container">
+        </div>
+</section>

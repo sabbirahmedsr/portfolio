@@ -1,0 +1,115 @@
+/* ==========================================================================
+   Base & Global Styles
+   ========================================================================== */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
+:root {
+    /* Color Palette - Dark Premium */
+    --color-bg-dark: #121212;
+    --color-bg-card: #1e1e1e;
+    --color-bg-light-fade: #2a2a2a;
+    --color-text-light: #e0e0e0;
+    --color-text-muted: #a0a0a0;
+    --color-primary-accent: #007bff; /* Unity Blue */
+    --color-secondary-accent: #00bcd4; /* Cyan Accent */
+    --color-border-subtle: #333333;
+    --color-hover-highlight: #282828;
+    --color-filter-bg: #282828;
+    --color-filter-border: #444444;
+
+    /* Spacing & Sizing */
+    --spacing-xs: 0.5rem;
+    --spacing-sm: 1rem;
+    --spacing-md: 1.5rem;
+    --spacing-lg: 2rem;
+    --border-radius-sm: 4px;
+    --border-radius-md: 8px;
+
+    /* Shadows */
+    --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.4);
+    --shadow-md: 0 5px 15px rgba(0, 0, 0, 0.5);
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    background-color: var(--color-bg-dark);
+    color: var(--color-text-light);
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+a {
+    color: var(--color-primary-accent);
+    text-decoration: none;
+    transition: color 0.2s ease-in-out;
+}
+a:hover {
+    color: var(--color-secondary-accent);
+    text-decoration: underline;
+}
+
+.app-container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: var(--spacing-md) var(--spacing-lg);
+    min-height: 100vh;
+}
+
+.loading-message {
+    text-align: center;
+    padding: var(--spacing-lg);
+    color: var(--color-text-muted);
+}
+
+/* --- Typography & Headings --- */
+.page-title {
+    font-size: 3rem;
+    font-weight: 700;
+    color: var(--color-text-light);
+    margin-top: var(--spacing-lg);
+    margin-bottom: var(--spacing-xs);
+    text-shadow: 0 0 10px rgba(0, 123, 255, 0.3); /* Subtle glow */
+}
+
+.page-subtitle {
+    font-size: 1.1rem;
+    color: var(--color-text-muted);
+    margin-bottom: var(--spacing-lg);
+    border-bottom: 1px solid var(--color-border-subtle);
+    padding-bottom: var(--spacing-sm);
+}
+
+/* --- Responsiveness --- */
+@media (max-width: 1200px) {
+    .app-container {
+        padding: var(--spacing-md);
+    }
+    .page-title {
+        font-size: 2.5rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .page-title {
+        font-size: 2rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .app-container {
+        padding: var(--spacing-sm);
+    }
+    .page-title {
+        font-size: 1.8rem;
+    }
+    .page-subtitle {
+        font-size: 1rem;
+    }
+}

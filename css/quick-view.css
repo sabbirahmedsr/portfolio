@@ -1,0 +1,239 @@
+/* ==========================================================================
+   Quick View Modal Styles
+   ========================================================================== */
+.quick-view-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.9); /* Dark overlay */
+    display: none;
+    align-items: center;
+    justify-content: center;
+    z-index: 3000;
+    backdrop-filter: blur(8px);
+    overflow-y: auto; /* Allow scrolling if content is too tall */
+    padding: 2rem;
+}
+
+.quick-view-modal.is-active {
+    display: flex;
+}
+
+.quick-view-content {
+    background-color: var(--color-bg-card);
+    width: 95%;
+    max-width: 1200px;
+    height: auto;
+    max-height: 90vh;
+    border-radius: var(--border-radius-md);
+    box-shadow: 0 0 30px rgba(0, 0, 0, 0.8);
+    display: flex;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Close button inherits global .close-btn styles */
+.quick-view-modal .close-btn {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    z-index: 3001;
+}
+
+/* --- Quick View Columns --- */
+.qv-media-column {
+    flex: 2;
+    background-color: #000;
+    padding: var(--spacing-md);
+    display: flex;
+    flex-direction: column;
+}
+
+.qv-info-column {
+    flex: 1.5;
+    padding: var(--spacing-lg);
+    display: flex;
+    flex-direction: column;
+    min-width: 350px;
+    border-left: 1px solid var(--color-border-subtle);
+}
+
+/* --- Media Section --- */
+.qv-main-media {
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    overflow: hidden;
+    border-radius: var(--border-radius-sm);
+    margin-bottom: var(--spacing-sm);
+}
+.qv-main-media-element {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+.qv-video {
+    background-color: #000;
+}
+
+.qv-thumbnails {
+    display: flex;
+    gap: var(--spacing-xs);
+    overflow-x: auto;
+    padding-bottom: var(--spacing-xs);
+}
+
+.qv-thumbnail-item {
+    min-width: 80px;
+    max-width: 80px;
+    height: 45px;
+    overflow: hidden;
+    border-radius: var(--border-radius-xs);
+    cursor: pointer;
+    border: 2px solid transparent;
+    transition: border-color 0.2s;
+}
+
+.qv-thumbnail-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.qv-thumbnail-item:hover,
+.qv-thumbnail-item.active {
+    border-color: var(--color-primary-accent);
+}
+
+/* --- Info Section --- */
+.qv-title {
+    font-size: 2rem;
+    font-weight: 700;
+    margin-bottom: var(--spacing-xs);
+    color: var(--color-text-light);
+}
+
+.qv-tagline {
+    font-size: 1rem;
+    color: var(--color-secondary-accent);
+    margin-bottom: var(--spacing-md);
+}
+
+.qv-info-scrollable {
+    flex-grow: 1;
+    overflow-y: auto;
+    padding-right: var(--spacing-xs); /* space for scrollbar */
+}
+
+.qv-section-title {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: var(--color-primary-accent);
+    margin-top: var(--spacing-sm);
+    margin-bottom: var(--spacing-xs);
+}
+
+.qv-specs p {
+    margin-bottom: 0.5rem;
+    color: var(--color-text-muted);
+}
+.qv-specs strong {
+    color: var(--color-text-light);
+}
+
+.qv-features-list {
+    list-style: none;
+    padding-left: 0;
+}
+.qv-features-list li {
+    position: relative;
+    padding-left: var(--spacing-md);
+    margin-bottom: 0.25rem;
+    color: var(--color-text-light);
+    font-size: 0.95rem;
+}
+.qv-features-list li::before {
+    content: "\f00c"; 
+    font-family: "Font Awesome 6 Free";
+    font-weight: 900;
+    color: var(--color-secondary-accent);
+    position: absolute;
+    left: 0;
+    top: 0;
+    font-size: 0.8rem;
+}
+
+.qv-summary {
+    color: var(--color-text-muted);
+    font-size: 0.95rem;
+}
+
+/* --- Action Button --- */
+.qv-info-actions {
+    padding-top: var(--spacing-md);
+    border-top: 1px solid var(--color-border-subtle);
+}
+
+.qv-details-btn {
+    display: block;
+    width: 100%;
+    text-align: center;
+    padding: 0.75rem;
+    border-radius: var(--border-radius-sm);
+    font-weight: 600;
+    transition: background-color 0.2s, transform 0.2s;
+    background-color: var(--color-primary-accent);
+    color: white;
+}
+.qv-details-btn:hover {
+    background-color: #0056b3;
+    transform: translateY(-2px);
+    text-decoration: none;
+}
+
+/* --- Gallery Card Quick Look Button --- */
+.quick-look-btn {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: rgba(0, 0, 0, 0.75);
+    color: white;
+    border: 1px solid var(--color-primary-accent);
+    padding: 0.5rem 1rem;
+    border-radius: var(--border-radius-sm);
+    font-size: 0.9rem;
+    cursor: pointer;
+    opacity: 0; /* Hidden by default */
+    pointer-events: none;
+    transition: opacity 0.3s;
+    z-index: 10;
+}
+
+.project-card-wrapper:hover .quick-look-btn {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.quick-look-btn i {
+    margin-right: 0.5rem;
+    color: var(--color-primary-accent);
+}
+
+/* --- Responsive Layout for Quick View --- */
+@media (max-width: 992px) {
+    .quick-view-content {
+        flex-direction: column;
+        max-height: 95vh;
+    }
+    .qv-media-column {
+        min-height: 350px;
+        flex: none;
+    }
+    .qv-info-column {
+        min-width: initial;
+        flex: none;
+        padding-top: var(--spacing-sm);
+    }
+}

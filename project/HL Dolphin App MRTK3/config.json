@@ -1,0 +1,73 @@
+{
+    "id": "hl-dolphin-app-mrtk3",
+    "title": "HL Dolphin App (MRTK3)",
+    "tagline": "Augmented Reality app for HoloLens 2.",
+    "shortDescription": "An interactive HoloLens 2 application featuring a virtual dolphin. This project is built with Unity and MRTK3, and includes several interactive experiences such as fish feeding, bubble popping, and more.",
+    "previewImage": "./README_SS.PNG",
+    
+    "features": [
+        "Immersive Virtual Dolphin: A fully animated dolphin that interacts realistically with the mixed-reality environment.",
+        "Hand-Tracked Interactions: Includes Fish Feeding and Bubble Popping mechanics using MRTK3's hand tracking.",
+        "Intuitive UX: Built with MRTK3's UI components for simple, gaze-and-hand-based control."
+    ],
+
+    "year": 2025,
+    "client": "AZMI STUDIO", 
+    "platforms": ["HoloLens 2", "Windows 10 or 11"],
+    
+    "proposalDiscussionTime": "September 2025",
+    "projectStartTime": "October 2025",
+    "projectCompletionTime": "November 2025",
+    "projectDuration": "5 Weeks",
+
+    "techStack": [
+        "Unity Editor: 6000.2.8f1",
+        "Visual Studio: 2022 (UWP/.NET)",
+        "C#",
+        "MRTK Core: org.mixedrealitytoolkit.uxcore-4.0.0-pre.1",
+        "MRTK Input: org.mixedrealitytoolkit.input-4.0.0-pre.1",
+        "MRTK Spatial Manipulation: org.mixedrealitytoolkit.spatialmanipulation-4.0.0-pre.1",
+        "MRTK UX Components: org.mixedrealitytoolkit.uxcomponents-4.0.0-pre.1",
+        "Microsoft OpenXR: 1.1.2",
+        "Unity OpenXR Plugin"
+    ],
+    
+    
+    "media": [
+        {
+            "url": "./README_SS.PNG", 
+            "alt": "Main project screenshot showing the virtual dolphin and the mixed-reality environment."
+        },
+        {
+            "url": "https://www.youtube.com/embed/dQw4w9WgXcQ", 
+            "alt": "Project Demo Video Placeholder"
+        },
+        {
+            "url": "./system_flow.gif",
+            "alt": "Gameplay System Flow Demonstration Placeholder"
+        }
+    ],
+    
+    "externalLinks": [
+        {
+            "label": "GitHub",
+            "url": "https://github.com/sabbirahmedsr/HL-Dolphin-App-MRTK3",
+            "iconClass": "fab fa-github"
+        },
+        {
+            "label": "GitLab",
+            "url": "https://gitlab.com/sabbirahmedsr/hl-dolphin-app-mrtk3",
+            "iconClass": "fab fa-gitlab"
+        },
+        {
+            "label": "Webpage",
+            "url": "./Assets/Info/Requirement.md",
+            "iconClass": "fas fa-file-pdf"
+        },
+        {
+            "label": "Attribution",
+            "url": "./Assets/Info/Attribute.md",
+            "iconClass": "fas fa-balance-scale"
+        }
+    ]
+}

@@ -1,0 +1,59 @@
+{
+    "id": "vr-q2-firefighter",
+    "title": "VR Q2 Firefighter Simulator",
+    "tagline": "High-fidelity training environment for the Meta Quest 2.",
+    "shortDescription": "A VR training simulation for firefighters, built for the Meta Quest 2. This project provides a realistic environment to practice emergency procedures and equipment handling.",
+    "previewImage": "./preview.png",
+    
+    "features": [
+        "Realistic Fire Simulation: Dynamic fire and smoke effects for an immersive training experience.",
+        "Interactive Equipment: Users can operate hoses, extinguishers, and other firefighting tools.",
+        "Scenario-Based Training: Multiple training modules covering different emergency situations."
+    ],
+
+    "year": 2023,
+    "client": "Training Solutions Inc.", 
+    "platforms": ["Meta Quest 2", "PC VR"],
+    
+    "proposalDiscussionTime": "January 2023",
+    "projectStartTime": "February 2023",
+    "projectCompletionTime": "April 2023",
+    "projectDuration": "10 Weeks",
+
+    "techStack": [
+        "Unity Editor",
+        "C#",
+        "Oculus Integration SDK",
+        "Universal Render Pipeline (URP)",
+        "Blender"
+    ],
+    
+    
+    "media": [
+        {
+            "url": "./preview.png", 
+            "alt": "Main screenshot of the firefighter simulator in action."
+        },
+        {
+            "url": "https://www.youtube.com/embed/VIDEO_ID_HERE", 
+            "alt": "Gameplay video of the firefighter training."
+        },
+        {
+            "url": "./gameplay.gif",
+            "alt": "Animated GIF showing equipment interaction."
+        }
+    ],
+    
+    "externalLinks": [
+        {
+            "label": "GitHub",
+            "url": "https://github.com/your-repo/vr-firefighter",
+            "iconClass": "fab fa-github"
+        },
+        {
+            "label": "Project Page",
+            "url": "",
+            "iconClass": "fas fa-globe"
+        }
+    ]
+}

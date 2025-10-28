@@ -13,11 +13,11 @@
 
     "unityVersion": "2021.3.8f1",
     "techStack": [
-        "Unity Editor",
-        "C#",
+        "Unity 6000.2.8f1", "C#", 
+        "Visual Studio 2022",
+        "Blender 3.6.16",
         "Oculus Integration SDK",
-        "Universal Render Pipeline (URP)",
-        "Blender"
+        "Universal Render Pipeline (URP)"
     ],
     
     

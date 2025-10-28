@@ -62,6 +62,17 @@ export async function renderDetailView(projectId) {
                 return `<a href="${link.url}" target="_blank" class="sidebar-link-btn">${iconHtml} ${link.label}</a>`;
             }).join('');
 
+        // Populate Tech Stack
+        const techStackContainer = document.getElementById('project-tech-stack');
+        if (techStackContainer && projectConfig.techStack && projectConfig.techStack.length > 0) {
+            techStackContainer.innerHTML = projectConfig.techStack
+                .map(tech => `<span class="tech-stack-item">${tech}</span>`)
+                .join('');
+        } else if (techStackContainer) {
+            // Hide the entire section if there's no tech stack
+            techStackContainer.parentElement.style.display = 'none';
+        }
+
         // --- Render Main Content Column ---
         renderDetailMedia(projectConfig, projectBasePath);
 

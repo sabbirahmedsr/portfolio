@@ -9,7 +9,7 @@ import { inferMediaType, convertToYoutubeEmbedUrl, parseDate, formatDateShort, g
 let currentProjectConfig = null;
 let projectBasePath = '';
 
-/**
+/** 
  * Initializes the Quick Look modal structure and attaches close listener.
  */
 export function initQuickLookModal() {
@@ -18,7 +18,7 @@ export function initQuickLookModal() {
     modalPlaceholder.id = 'quick-look-container';
     modalPlaceholder.innerHTML = quickLookHtml;
     document.body.appendChild(modalPlaceholder);
-
+    
     const closeModal = () => {
         const modal = document.getElementById('quick-look-modal');
         if (modal) {
@@ -29,6 +29,12 @@ export function initQuickLookModal() {
         const mainMediaContainer = document.querySelector('.ql-main-media');
         if (mainMediaContainer) mainMediaContainer.innerHTML = '';
     };
+
+    // Add listener to the details button to close the modal on click
+    const detailsBtn = document.getElementById('ql-view-details-btn');
+    if (detailsBtn) {
+        detailsBtn.addEventListener('click', closeModal);
+    }
 
     const closeBtn = document.getElementById('close-quick-look');
     const modalOverlay = document.getElementById('quick-look-modal');

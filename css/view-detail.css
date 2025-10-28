@@ -142,6 +142,33 @@
     text-decoration: none;
 }
 
+/* --- Tech Stack Section (New) --- */
+.tech-stack-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem; /* 8px */
+}
+
+.tech-stack-item {
+    /* Code-like tag design */
+    background-color: var(--color-bg-light-fade);
+    color: var(--color-text-muted);
+    padding: 3px 8px;
+    border-radius: var(--border-radius-sm); /* Less rounded, more like a code tag */
+    font-size: 0.8rem;
+    font-family: 'Fira Code', monospace, sans-serif; /* Monospace font for code feel */
+    border: 1px solid var(--color-border-subtle);
+    white-space: nowrap;
+    transition: all 0.2s ease;
+    cursor: default;
+}
+
+.tech-stack-item:hover {
+    background-color: var(--color-hover-highlight);
+    color: var(--color-text-light);
+    border-color: var(--color-filter-border);
+}
+
 .sidebar-link-btn i {
     margin-right: var(--spacing-xs);
 }

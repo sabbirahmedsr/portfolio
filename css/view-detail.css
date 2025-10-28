@@ -120,30 +120,6 @@ pre {
     color: var(--color-text-light);
 }
 
-.feature-list {
-    list-style: none;
-    padding-left: 0;
-    margin-bottom: var(--spacing-md);
-}
-
-.feature-list li {
-    position: relative;
-    padding-left: var(--spacing-md);
-    margin-bottom: var(--spacing-xs);
-    color: var(--color-text-light);
-}
-
-.feature-list li::before {
-    content: "\f00c";
-    font-family: "Font Awesome 6 Free";
-    font-weight: 900;
-    color: var(--color-primary-accent); /* Use primary blue for checkmarks */
-    position: absolute;
-    left: 0;
-    top: 0;
-    font-size: 0.9rem;
-}
-
 .tech-tag-container {
     display: flex;
     flex-wrap: wrap;

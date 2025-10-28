@@ -143,10 +143,6 @@ a:hover {
     transition: transform 0.3s ease;
 }
 
-.project-card-wrapper:hover .card-image {
-    /* transform: scale(1.03); */ /* Hover zoom disabled per request */
-}
-
 
 /* --- Media Overlay Styles (New Feature) --- */
 .media-overlay {

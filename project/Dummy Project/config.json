@@ -1,0 +1,41 @@
+{
+    "title": "Title of the project",
+    "tagline": "A short catchy tagline for the project",
+    "shortDescription": "1-2 sentence summary for Quick Look and detail page intro.",
+    "previewImage": "./preview.png",
+
+    "client": "AZMI STUDIO", 
+    "platforms": [
+        "Windows 10",
+        "HoloLens 2"
+    ],
+    
+    "InitiationDate": "01-01-2000",
+    "DevStartDate": "15-01-2000",
+    "DevEndDate": "30-01-2000",
+
+    "unityVersion": "XXXX.X.Xf1",
+    "techStack": [
+        "Array of key technologies, frameworks, and tools.",
+        "Example: 'React', 'Unity', 'C#'"
+    ],
+    
+    "media": [
+        {
+            "url": "./preview.png",
+            "alt": "Short, descriptive text for the media (accessibility)."
+        },
+        {
+            "url": "https://www.youtube.com/watch?v=your_video_id",
+            "alt": "Description for this specific YouTube video."
+        }
+    ],
+
+    "externalLinks": [
+        {
+            "label": "Caption",
+            "url": "Full destination URL.",
+            "iconClass": "Font Awesome icon class (e.g., 'fab fa-github')."
+        }
+    ]
+}

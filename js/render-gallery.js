@@ -5,7 +5,7 @@
 
 import { appContainer, masterProjectList, views } from './app.js';
 import { initQuickLookModal, renderQuickLook } from './quicklook.js';
-import { inferMediaType } from './utils.js'; // Import inferMediaType
+import { inferMediaType, parseDate } from './utils.js'; // Import inferMediaType and parseDate
 
 /**
  * Gets a specific Font Awesome icon class based on the platform name.
@@ -63,6 +63,10 @@ export function renderGalleryView(filteredList = masterProjectList) {
         // Get the primary platform and its specific icon
         const firstPlatform = project.platforms && project.platforms.length > 0 ? project.platforms[0] : 'N/A';
         const platformIconClass = getPlatformIcon(firstPlatform);
+
+        // Extract year from DevEndDate for display
+        const completionDate = parseDate(project.DevEndDate);
+        const displayYear = completionDate ? completionDate.getFullYear() : 'N/A';
             
         return `<div class="project-card-wrapper" data-id="${project.id}">
             <a href="#/project/${project.id}" class="project-card">
@@ -76,7 +80,7 @@ export function renderGalleryView(filteredList = masterProjectList) {
                 <div class="card-info">
                     <h3 class="card-title">${project.title}</h3>
                     <div class="card-meta">
-                        <span class="card-year"><i class="fas fa-calendar-alt"></i> ${project.year}</span>
+                        <span class="card-year"><i class="fas fa-calendar-alt"></i> ${displayYear}</span>
                         <span class="card-platform"><i class="${platformIconClass}"></i> ${firstPlatform}</span>
                     </div>
                 </div>
@@ -103,7 +107,11 @@ function populateFilters() {
     const platformFilter = document.getElementById('filter-platform');
     const searchInput = document.getElementById('search-input');
 
-    const years = [...new Set(masterProjectList.map(p => p.year))].sort((a, b) => b - a);
+    const years = [...new Set(masterProjectList.map(p => {
+        const date = parseDate(p.DevEndDate);
+        return date ? date.getFullYear() : null;
+    }).filter(year => year !== null))]
+    .sort((a, b) => b - a);
     const platforms = [...new Set(masterProjectList.flatMap(p => p.platforms))].sort();
 
     years.forEach(year => {
@@ -124,7 +132,10 @@ function populateFilters() {
         let filteredList = masterProjectList;
 
         if (selectedYear !== 'all') {
-            filteredList = filteredList.filter(p => p.year == selectedYear);
+            filteredList = filteredList.filter(p => {
+                const date = parseDate(p.DevEndDate);
+                return date && date.getFullYear() == selectedYear;
+            });
         }
 
         if (selectedPlatform !== 'all') {

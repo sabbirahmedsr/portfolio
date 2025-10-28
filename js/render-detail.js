@@ -4,7 +4,7 @@
 ************************************************************/
 
 import { masterProjectList, views } from './app.js';
-import { fetchData, inferMediaType, convertToYoutubeEmbedUrl } from './utils.js';
+import { fetchData, inferMediaType, convertToYoutubeEmbedUrl, parseDate, formatDateLong } from './utils.js';
 import { initLightbox } from './lightbox.js';
 
 /**
@@ -27,7 +27,13 @@ export async function renderDetailView(projectId) {
         const longDescriptionMD = await fetchData(readmePath, 'text');
         
         document.getElementById('project-title').textContent = projectConfig.title;
-        document.getElementById('project-tagline').textContent = projectConfig.tagline;
+
+        const taglineElement = document.getElementById('project-tagline');
+        if (projectConfig.tagline) {
+            taglineElement.textContent = projectConfig.tagline;
+        } else {
+            taglineElement.style.display = 'none';
+        }
         document.getElementById('project-summary').textContent = projectConfig.shortDescription;
 
         const heroImageUrl = projectConfig.previewImage.startsWith('./')
@@ -44,23 +50,20 @@ export async function renderDetailView(projectId) {
         const timelineElement = document.getElementById('project-timeline');
         let timelineHTML = '';
         
-        if (projectConfig.proposalDiscussionTime) {
-            timelineHTML += `<p><strong>Proposal Discussion:</strong> ${projectConfig.proposalDiscussionTime}</p>`;
+        const proposalDate = parseDate(projectConfig.InitiationDate);
+        const startDate = parseDate(projectConfig.DevStartDate);
+        const completionDate = parseDate(projectConfig.DevEndDate);
+
+        if (proposalDate) {
+            timelineHTML += `<p><strong>Proposal Discussion:</strong> ${formatDateLong(proposalDate)}</p>`;
         }
-        if (projectConfig.projectStartTime) {
-            timelineHTML += `<p><strong>Project Start Time:</strong> ${projectConfig.projectStartTime}</p>`;
+        if (startDate) {
+            timelineHTML += `<p><strong>Project Start Time:</strong> ${formatDateLong(startDate)}</p>`;
         }
-        if (projectConfig.projectCompletionTime) {
-            timelineHTML += `<p><strong>Project Completion Time:</strong> ${projectConfig.projectCompletionTime}</p>`;
-        }
-        if (projectConfig.projectDuration) {
-            timelineHTML += `<p><strong>Total Duration:</strong> ${projectConfig.projectDuration}</p>`;
+        if (completionDate) {
+            timelineHTML += `<p><strong>Project Completion Time:</strong> ${formatDateLong(completionDate)}</p>`;
         }
         timelineElement.innerHTML = timelineHTML;
-
-        // Features List
-        const featureList = document.getElementById('feature-list');
-        featureList.innerHTML = projectConfig.features.map(f => `<li>${f}</li>`).join('');
 
         // Tech Stack
         const techStackList = document.getElementById('tech-stack-list');

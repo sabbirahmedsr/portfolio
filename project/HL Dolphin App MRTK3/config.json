@@ -1,24 +1,17 @@
 {
     "title": "HL Dolphin App MRTK3",
-    "tagline": "Augmented Reality app for HoloLens 2.",
+    "tagline": "Play with dolphin in real world",
     "shortDescription": "An interactive HoloLens 2 application featuring a virtual dolphin. This project is built with Unity and MRTK3, and includes several interactive experiences such as fish feeding, bubble popping, and more.",
-    "previewImage": "./preview.png",
-    
-    "features": [
-        "Immersive Virtual Dolphin: A fully animated dolphin that interacts realistically with the mixed-reality environment.",
-        "Hand-Tracked Interactions: Includes Fish Feeding and Bubble Popping mechanics using MRTK3's hand tracking.",
-        "Intuitive UX: Built with MRTK3's UI components for simple, gaze-and-hand-based control."
-    ],
+    "previewImage": "./preview.png",   
 
-    "year": 2025,
     "client": "AZMI STUDIO", 
     "platforms": ["HoloLens 2"],
     
-    "proposalDiscussionTime": "September 2025",
-    "projectStartTime": "October 2025",
-    "projectCompletionTime": "November 2025",
-    "projectDuration": "5 Weeks",
+    "InitiationDate": "01-09-2025",
+    "DevStartDate": "01-10-2025",
+    "DevEndDate": "30-11-2025",
 
+    "unityVersion": "2021.3.8f1",
     "techStack": [
         "Unity Editor: 6000.2.8f1",
         "Visual Studio: 2022 (UWP/.NET)",
@@ -46,6 +39,7 @@
             "alt": "Gameplay System Flow Demonstration Placeholder"
         }
     ],
+
     
     "externalLinks": [
         {

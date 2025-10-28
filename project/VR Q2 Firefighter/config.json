@@ -1,24 +1,17 @@
 {
     "title": "VR Q2 Firefighter Simulator",
-    "tagline": "High-fidelity training environment for the Meta Quest 2.",
+    "tagline": "VR Training for Real Heroes",
     "shortDescription": "A VR training simulation for firefighters, built for the Meta Quest 2. This project provides a realistic environment to practice emergency procedures and equipment handling.",
-    "previewImage": "./preview.png",
-    
-    "features": [
-        "Realistic Fire Simulation: Dynamic fire and smoke effects for an immersive training experience.",
-        "Interactive Equipment: Users can operate hoses, extinguishers, and other firefighting tools.",
-        "Scenario-Based Training: Multiple training modules covering different emergency situations."
-    ],
+    "previewImage": "./preview.png",    
 
-    "year": 2023,
     "client": "Training Solutions Inc.", 
     "platforms": ["Meta Quest 2", "Meta Quest 3"],
     
-    "proposalDiscussionTime": "January 2023",
-    "projectStartTime": "February 2023",
-    "projectCompletionTime": "April 2023",
-    "projectDuration": "10 Weeks",
+    "InitiationDate": "15-01-2023",
+    "DevStartDate": "01-02-2023",
+    "DevEndDate": "10-04-2023",
 
+    "unityVersion": "2021.3.8f1",
     "techStack": [
         "Unity Editor",
         "C#",

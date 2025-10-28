@@ -38,7 +38,7 @@
     display: flex;
     justify-content: space-between;
     align-items: flex-start;
-    margin-bottom: var(--spacing-sm);
+    margin-bottom: var(--spacing-xs);
 }
 .ql-header .close-btn {
     /* Override absolute positioning from global .close-btn */
@@ -69,11 +69,11 @@
 }
 
 .ql-info-column {
-    flex: 1.2; /* Adjusted info column width */
+    flex: 1; /* Further adjusted info column width */
     padding: var(--spacing-lg);
     display: flex;
     flex-direction: column;
-    min-width: 400px; /* Slightly wider minimum for better information layout */
+    min-width: 320px; /* Further reduced minimum width */
     border-left: 1px solid var(--color-border-subtle);
     background-color: var(--color-bg-light-fade); /* Slightly different background for info */
 }
@@ -81,7 +81,7 @@
 /* --- Media Section --- */
 .ql-main-media {
     width: 100%;
-    aspect-ratio: 16 / 9;
+    aspect-ratio: 3 / 2;
     overflow: hidden;
     border-radius: var(--border-radius-sm);
     margin-bottom: var(--spacing-sm);
@@ -183,18 +183,34 @@
 
 .ql-section-title {
     font-size: 1.15rem; /* Slightly smaller */
-    font-weight: 600;
-    color: var(--color-secondary-accent); /* Use cyan for section titles */
+    font-weight: 500; /* Reduced weight to be less than main title */
+    color: var(--color-text-light);
     margin-top: var(--spacing-sm);
-    margin-bottom: var(--spacing-sm);
+    margin-bottom: var(--spacing-xs); /* Reduced space after title */
+    padding-top: var(--spacing-sm);
+    border-top: 1px solid var(--color-filter-border);
 }
 
-.ql-specs p {
-    margin-bottom: 0.5rem;
+.ql-specs {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem; /* Space between each spec item */
+}
+
+.spec-item {
+    display: grid;
+    grid-template-columns: 100px 1fr; /* Fixed width for labels, flexible for values */
+    gap: 1rem;
+    font-size: 0.9rem;
+}
+
+.spec-label {
     color: var(--color-text-muted);
 }
-.ql-specs strong {
+
+.spec-value {
     color: var(--color-text-light);
+    font-weight: 500;
 }
 
 .ql-features-list {
@@ -222,6 +238,43 @@
 .ql-summary {
     color: var(--color-text-muted);
     font-size: 0.9rem;
+    text-align: justify;
+}
+
+/* --- External Links Section --- */
+.ql-external-links {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--spacing-xs);
+    border-top: 1px solid var(--color-filter-border);
+    padding-top: var(--spacing-sm);
+}
+
+.ql-external-link-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    padding: 0.75rem;
+    background-color: var(--color-bg-card);
+    color: var(--color-text-muted);
+    border-radius: var(--border-radius-sm);
+    border: 1px solid var(--color-border-subtle);
+    transition: all 0.2s ease;
+    font-size: 0.9rem;
+    text-align: center;
+}
+
+.ql-external-link-btn:hover {
+    background-color: var(--color-hover-highlight);
+    color: var(--color-text-light);
+    border-color: var(--color-secondary-accent);
+    text-decoration: none;
+}
+
+.ql-external-link-placeholder {
+    background-color: transparent; /* Make it invisible */
+    pointer-events: none; /* Make it unclickable */
 }
 
 /* --- Action Button (ASSET STORE BUTTON) --- */

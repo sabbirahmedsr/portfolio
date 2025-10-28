@@ -6,5 +6,9 @@
     {
         "id": "vr-q2-firefighter",
         "projectConfigPath": "VR Q2 Firefighter/config.json"
+    },
+    {
+        "id": "dummy-project",
+        "projectConfigPath": "Dummy Project/config.json"
     }
 ]

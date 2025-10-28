@@ -4,7 +4,7 @@
 ************************************************************/
 
 import { masterProjectList, views } from './app.js';
-import { inferMediaType, convertToYoutubeEmbedUrl } from './utils.js';
+import { inferMediaType, convertToYoutubeEmbedUrl, parseDate, formatDateShort } from './utils.js';
 
 let currentProjectConfig = null;
 let projectBasePath = '';
@@ -64,28 +64,74 @@ export function renderQuickLook(projectId) {
     projectBasePath = masterEntry.projectConfigPath.replace('config.json', '');
 
     try {
-        document.getElementById('ql-title').textContent = currentProjectConfig.title;
-        document.getElementById('ql-tagline').textContent = currentProjectConfig.tagline;
-        document.getElementById('ql-summary').textContent = currentProjectConfig.shortDescription;
+        const titleElement = document.getElementById('ql-title');
+        if (titleElement) titleElement.textContent = currentProjectConfig.title;
+        
+        const taglineElement = document.getElementById('ql-tagline');
+        if (taglineElement) {
+            if (currentProjectConfig.tagline) {
+                taglineElement.textContent = currentProjectConfig.tagline;
+                taglineElement.style.display = 'block';
+            } else {
+                taglineElement.style.display = 'none';
+            }
+        }
+
+        const summaryElement = document.getElementById('ql-summary');
+        if (summaryElement) summaryElement.textContent = currentProjectConfig.shortDescription;
         
         const detailsBtn = document.getElementById('ql-view-details-btn');
-        detailsBtn.href = `#/project/${projectId}`;
-        
-        const featuresList = document.getElementById('ql-features');
-        if (featuresList) {
-            featuresList.innerHTML = currentProjectConfig.features
-                .slice(0, 3) 
-                .map(f => `<li>${f}</li>`).join('');
-        }
+        if (detailsBtn) detailsBtn.href = `#/project/${projectId}`;
 
         const qlSpecs = document.getElementById('ql-specs');
         if (qlSpecs) {
-            const specsHTML = `
-                <p><strong>Platforms:</strong> ${currentProjectConfig.platforms.join(', ')}</p>
-                <p><strong>Duration:</strong> ${currentProjectConfig.projectDuration}</p>
-                <p><strong>Key Tech:</strong> ${currentProjectConfig.techStack.slice(0, 3).join(', ')}...</p>
-            `;
+            let specsHTML = '';
+            if (currentProjectConfig.unityVersion && currentProjectConfig.unityVersion !== 'N/A') {
+                specsHTML += `<div class="spec-item">
+                                <span class="spec-label">Unity Version</span>
+                                <span class="spec-value">${currentProjectConfig.unityVersion}</span>
+                              </div>`;
+            }
+            const startDate = parseDate(currentProjectConfig.DevStartDate);
+            const endDate = parseDate(currentProjectConfig.DevEndDate);
+            if (startDate && endDate) {
+                specsHTML += `<div class="spec-item">
+                                <span class="spec-label">Timeline</span>
+                                <span class="spec-value">${formatDateShort(startDate)} - ${formatDateShort(endDate)}</span>
+                              </div>`;
+            }
+            if (currentProjectConfig.platforms && currentProjectConfig.platforms.length > 0) {
+                specsHTML += `<div class="spec-item">
+                                <span class="spec-label">Platform</span>
+                                <span class="spec-value">${currentProjectConfig.platforms.join(', ')}</span>
+                              </div>`;
+            }
             qlSpecs.innerHTML = specsHTML;
+        }
+
+        // External Links
+        const linksWrapper = document.getElementById('ql-links-wrapper');
+        const linksContainer = document.getElementById('ql-external-links');
+        if (linksWrapper && linksContainer && currentProjectConfig.externalLinks) {
+            const validLinks = currentProjectConfig.externalLinks
+                .filter(link => link.url)
+                .slice(0, 4);
+
+            if (validLinks.length > 0) {
+                let linksHTML = '';
+                for (let i = 0; i < 4; i++) {
+                    if (validLinks[i]) {
+                        const link = validLinks[i];
+                        const iconHtml = link.iconClass ? `<i class="${link.iconClass}"></i>` : '';
+                        linksHTML += `<a href="${link.url}" target="_blank" class="ql-external-link-btn">${iconHtml} ${link.label}</a>`;
+                    } else {
+                        // Add a placeholder for an empty cell to maintain the grid structure
+                        linksHTML += `<div class="ql-external-link-placeholder"></div>`;
+                    }
+                }
+                linksContainer.innerHTML = linksHTML;
+                linksWrapper.style.display = 'block';
+            }
         }
 
         renderQuickLookMedia();

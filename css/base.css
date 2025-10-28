@@ -60,7 +60,7 @@ a:hover {
 }
 
 .app-container {
-    padding: var(--spacing-md) var(--spacing-lg);
+    padding: 0 var(--spacing-lg) var(--spacing-sm) var(--spacing-lg); /* Removed top padding, kept bottom and side padding */
     min-height: 100vh;
 }
 
@@ -92,7 +92,8 @@ a:hover {
 
 .project-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+    justify-content: center; /* Center the grid items */
     gap: var(--spacing-lg);
     padding: var(--spacing-lg) 0;
 }

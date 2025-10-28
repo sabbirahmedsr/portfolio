@@ -7,7 +7,7 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: var(--spacing-sm) 0;
+    padding: var(--spacing-xs) 0; /* Reduced vertical padding */
     border-radius: var(--border-radius-md);
     margin-bottom: var(--spacing-lg);
     border-bottom: 1px solid var(--color-border-subtle);
@@ -16,7 +16,7 @@
 .header-branding {
     display: flex;
     align-items: center;
-    gap: var(--spacing-md);
+    gap: var(--spacing-sm); /* Reduced gap between logo and title */
 }
 
 .logo-button {
@@ -126,6 +126,8 @@
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
     gap: var(--spacing-lg);
+    justify-content: center; /* Center the grid items */
+    padding: var(--spacing-lg) 0;
 }
 
 .project-card-wrapper {
@@ -141,10 +143,6 @@
     /* Inherits styling from base.css */
     border: 1px solid var(--color-border-subtle); /* Keep explicit border here */
     height: 100%; /* Ensure the card fills its wrapper */
-}
-
-.project-card:hover {
-    /* Inherits hover effects from base.css */
 }
 
 .card-image-wrapper {
@@ -180,7 +178,7 @@
 .card-tagline {
     font-size: 0.95rem;
     color: var(--color-text-muted);
-    margin-bottom: var(--spacing-sm);
+    margin-bottom: var(--spacing-xs); /* Reduced space below tagline */
     flex-grow: 1; /* Retain grow property to push meta down */
 }
 
@@ -190,7 +188,7 @@
     justify-content: space-between; /* Using space-between for meta data */
     font-size: 0.85rem;
     color: var(--color-text-muted);
-    padding-top: var(--spacing-sm);
+    padding-top: var(--spacing-xs); /* Reduced space above border */
     border-top: 1px dashed var(--color-border-subtle);
     margin-top: auto; /* Push meta to bottom */
 }

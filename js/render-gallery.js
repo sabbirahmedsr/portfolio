@@ -8,6 +8,29 @@ import { initQuickLookModal, renderQuickLook } from './quicklook.js';
 import { inferMediaType } from './utils.js'; // Import inferMediaType
 
 /**
+ * Gets a specific Font Awesome icon class based on the platform name.
+ * @param {string} platform The name of the platform.
+ * @returns {string} The corresponding icon class.
+ */
+function getPlatformIcon(platform) {
+    const platformLower = platform.toLowerCase();
+    if (platformLower.includes('windows')) {
+        return 'fab fa-windows';
+    }
+    if (platformLower.includes('quest') || platformLower.includes('vr') || platformLower.includes('oculus')) {
+        return 'fas fa-vr-cardboard';
+    }
+    if (platformLower.includes('android')) {
+        return 'fab fa-android';
+    }
+    if (platformLower.includes('web')) {
+        return 'fas fa-globe';
+    }
+    // Default icon
+    return 'fas fa-desktop';
+}
+
+/**
  * Renders the Gallery View.
  */
 export function renderGalleryView(filteredList = masterProjectList) {
@@ -36,6 +59,10 @@ export function renderGalleryView(filteredList = masterProjectList) {
         } else if (previewMediaType === 'gif') {
             mediaOverlayHtml = '<div class="media-overlay gif-overlay">GIF</div>';
         }
+
+        // Get the primary platform and its specific icon
+        const firstPlatform = project.platforms && project.platforms.length > 0 ? project.platforms[0] : 'N/A';
+        const platformIconClass = getPlatformIcon(firstPlatform);
             
         return `<div class="project-card-wrapper" data-id="${project.id}">
             <a href="#/project/${project.id}" class="project-card">
@@ -48,10 +75,9 @@ export function renderGalleryView(filteredList = masterProjectList) {
                 </div>
                 <div class="card-info">
                     <h3 class="card-title">${project.title}</h3>
-                    <p class="card-tagline">${project.tagline}</p>
                     <div class="card-meta">
                         <span class="card-year"><i class="fas fa-calendar-alt"></i> ${project.year}</span>
-                        <span class="card-platform"><i class="fas fa-desktop"></i> ${project.platforms.join(', ')}</span>
+                        <span class="card-platform"><i class="${platformIconClass}"></i> ${firstPlatform}</span>
                     </div>
                 </div>
             </a>

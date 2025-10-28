@@ -1,25 +1,19 @@
 /* ==========================================================================
-   Detail View Styles
-   ========================================================================== */
+    View: Project Detail (Updated and Consolidated)
+    Description: Contains all styles for the single project detail page, previously split between detail.css and view-detail.css.
+    ========================================================================== */
 .detail-view {
     padding-top: var(--spacing-lg);
 }
 
 .detail-content {
     display: grid;
-    grid-template-columns: 2.5fr 1fr; /* Adjusted ratio */
+    grid-template-columns: 2.5fr 1fr; /* Main Content | Sidebar */
     gap: var(--spacing-lg);
     margin-top: var(--spacing-lg);
 }
 
-.main-content {
-    /* Holds description, features, media */
-}
-
-.specs-column {
-    /* Holds timeline, tech stack, links */
-}
-
+/* --- Hero Media (Main Image/Video) --- */
 .hero-media {
     width: 100%;
     aspect-ratio: 16 / 9;
@@ -27,16 +21,33 @@
     border-radius: var(--border-radius-md);
     overflow: hidden;
     margin-bottom: var(--spacing-lg);
-    box-shadow: var(--shadow-md);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.7); /* Stronger shadow for main media */
+    position: relative; /* IMPORTANT: For media overlays */
+    cursor: zoom-in; /* Indicate media is clickable (for Lightbox) */
 }
 
-.hero-media img {
+.hero-media img,
+.hero-media video {
     width: 100%;
     height: 100%;
     object-fit: cover;
     display: block;
 }
 
+/* Apply overlays to Hero Media */
+.hero-media .media-overlay.gif-overlay {
+    top: auto;
+    bottom: var(--spacing-md);
+    left: var(--spacing-md);
+    right: auto;
+}
+.hero-media .media-overlay.video-overlay {
+    /* Uses default centered positioning from base.css */
+    font-size: 4rem; /* Larger play icon for the main video */
+}
+
+
+/* --- Project Description and Specs --- */
 .section-heading {
     font-size: 2rem;
     font-weight: 600;
@@ -44,7 +55,7 @@
     margin-top: var(--spacing-lg);
     margin-bottom: var(--spacing-sm);
     padding-bottom: var(--spacing-xs);
-    border-bottom: 1px solid var(--color-border-subtle);
+    border-bottom: 2px solid var(--color-primary-accent); /* Highlight heading */
 }
 
 .project-summary-text {
@@ -53,7 +64,7 @@
     margin-bottom: var(--spacing-lg);
     padding: var(--spacing-md);
     background-color: var(--color-bg-light-fade);
-    border-left: 4px solid var(--color-secondary-accent);
+    border-left: 5px solid var(--color-secondary-accent); /* Stronger accent border */
     border-radius: var(--border-radius-md);
     box-shadow: var(--shadow-sm);
 }
@@ -66,12 +77,12 @@ pre {
     border-radius: var(--border-radius-md);
     border: 1px solid var(--color-border-subtle);
     overflow-x: auto;
-    font-family: 'Fira Code', 'Cascadia Code', 'Consolas', monospace; /* Monospace font for code */
+    font-family: 'Fira Code', 'Cascadia Code', 'Consolas', monospace;
     color: var(--color-text-light);
     box-shadow: var(--shadow-sm);
 }
 
-/* --- Specs Boxes --- */
+/* --- Specs Boxes (Sidebar Content) --- */
 .specs-box {
     background-color: var(--color-bg-card);
     border: 1px solid var(--color-border-subtle);
@@ -79,6 +90,8 @@ pre {
     border-radius: var(--border-radius-md);
     margin-bottom: var(--spacing-lg);
     box-shadow: var(--shadow-sm);
+    /* Asset Store Look: Optional subtle gradient background */
+    background-image: linear-gradient(180deg, rgba(0,0,0,0.05) 0%, rgba(0,0,0,0) 100%);
 }
 
 .box-title {
@@ -95,7 +108,7 @@ pre {
 }
 
 .box-title i {
-    color: var(--color-primary-accent);
+    color: var(--color-secondary-accent); /* Use cyan accent for box icons */
 }
 
 .specs-box p {
@@ -108,7 +121,7 @@ pre {
 }
 
 .feature-list {
-    list-style: none; /* Remove default bullet */
+    list-style: none;
     padding-left: 0;
     margin-bottom: var(--spacing-md);
 }
@@ -121,27 +134,23 @@ pre {
 }
 
 .feature-list li::before {
-    content: "\f00c"; /* Font Awesome checkmark */
+    content: "\f00c";
     font-family: "Font Awesome 6 Free";
     font-weight: 900;
-    color: var(--color-secondary-accent);
+    color: var(--color-primary-accent); /* Use primary blue for checkmarks */
     position: absolute;
     left: 0;
     top: 0;
     font-size: 0.9rem;
 }
 
-.tech-tag-container .tech-tag {
-    display: inline-block;
-    background-color: var(--color-bg-light-fade);
-    color: var(--color-text-light);
-    padding: 0.3rem 0.6rem;
-    border-radius: var(--border-radius-sm);
-    font-size: 0.85rem;
-    margin: 0.25rem;
-    border: 1px solid var(--color-filter-border);
-    transition: background-color 0.2s;
+.tech-tag-container {
+    display: flex;
+    flex-wrap: wrap;
+    margin: calc(var(--spacing-xs) * -1); /* Negative margin to offset tag margin */
 }
+
+/* .tech-tag styles are assumed to be in base.css */
 .tech-tag-container .tech-tag:hover {
     background-color: var(--color-primary-accent);
 }
@@ -172,12 +181,46 @@ pre {
     text-decoration: none;
 }
 
+/* --- Media Gallery (Screenshots/Video Previews) --- */
 #media-gallery {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); /* More compact previews */
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); /* Larger previews */
     gap: var(--spacing-sm);
     margin-top: var(--spacing-lg);
 }
+
+.gallery-item {
+    position: relative; /* IMPORTANT: for media overlays */
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    overflow: hidden;
+    border-radius: var(--border-radius-sm);
+    box-shadow: var(--shadow-sm);
+    cursor: zoom-in;
+    transition: transform 0.2s;
+}
+.gallery-item:hover {
+    transform: scale(1.02);
+}
+
+.gallery-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* Apply overlays to Gallery Items */
+.gallery-item .media-overlay.gif-overlay {
+    top: auto;
+    bottom: var(--spacing-xs);
+    left: var(--spacing-xs);
+    right: auto;
+}
+.gallery-item .media-overlay.video-overlay {
+    /* Uses default centered positioning from base.css */
+    font-size: 2.5rem; /* Medium play icon for previews */
+}
+
 
 /* --- Responsiveness --- */
 @media (max-width: 1200px) {
@@ -189,6 +232,9 @@ pre {
 @media (max-width: 992px) {
     .detail-content {
         grid-template-columns: 1fr; /* Stack columns on smaller screens */
+    }
+    .specs-box, .tech-tag-container {
+        margin-bottom: var(--spacing-md);
     }
 }
 

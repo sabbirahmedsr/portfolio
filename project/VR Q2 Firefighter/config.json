@@ -1,5 +1,4 @@
 {
-    "id": "vr-q2-firefighter",
     "title": "VR Q2 Firefighter Simulator",
     "tagline": "High-fidelity training environment for the Meta Quest 2.",
     "shortDescription": "A VR training simulation for firefighters, built for the Meta Quest 2. This project provides a realistic environment to practice emergency procedures and equipment handling.",
@@ -13,7 +12,7 @@
 
     "year": 2023,
     "client": "Training Solutions Inc.", 
-    "platforms": ["Meta Quest 2", "PC VR"],
+    "platforms": ["Meta Quest 2"],
     
     "proposalDiscussionTime": "January 2023",
     "projectStartTime": "February 2023",
@@ -35,11 +34,11 @@
             "alt": "Main screenshot of the firefighter simulator in action."
         },
         {
-            "url": "https://www.youtube.com/embed/VIDEO_ID_HERE", 
+            "url": "https://youtu.be/LFEnQWLcJ-4?si=xaPk4La4cGwU09WO", 
             "alt": "Gameplay video of the firefighter training."
         },
         {
-            "url": "./gameplay.gif",
+            "url": "./test.gif",
             "alt": "Animated GIF showing equipment interaction."
         }
     ],

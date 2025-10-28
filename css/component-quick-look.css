@@ -1,0 +1,322 @@
+/* ==========================================================================
+    Component: Quick Look Modal (Updated for Asset Store Look & Overlays)
+    ========================================================================== */
+.quick-look-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.85); /* Slightly lighter overlay */
+    display: none;
+    align-items: center;
+    justify-content: center;
+    z-index: 3000;
+    backdrop-filter: blur(8px);
+    overflow-y: auto;
+}
+
+.quick-look-modal.is-active {
+    display: flex;
+}
+
+.quick-look-content {
+    background-color: var(--color-bg-card);
+    width: 95%;
+    max-width: 1300px; /* Made slightly wider */
+    height: auto;
+    max-height: 95vh; /* Increased height */
+    border-radius: var(--border-radius-md);
+    box-shadow: var(--shadow-lg); /* More pronounced shadow */
+    display: flex;
+    position: relative;
+    overflow: hidden;
+    margin: 2rem; /* Apply margin to the content instead of padding on the overlay */
+}
+
+.ql-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: var(--spacing-sm);
+}
+.ql-header .close-btn {
+    /* Override absolute positioning from global .close-btn */
+    position: static; 
+    font-size: 1.5rem; /* Reset font size for icon control */
+    cursor: pointer;
+    font-weight: normal; /* Override bold from global style */
+    color: var(--color-text-muted);
+    transition: color 0.2s ease;
+    line-height: 1; /* Ensure proper vertical alignment */
+    padding: 0.25rem; /* Add some clickable area */
+    width: 24px; /* Explicit size for the icon */
+    height: 24px;
+}
+
+.ql-header .close-btn:hover {
+    color: var(--color-secondary-accent);
+}
+
+/* --- Quick View Columns --- */
+.ql-media-column {
+    flex: 2;
+    padding: var(--spacing-md);
+    display: flex;
+    flex-direction: column;
+    /* Match background to card background, ensuring consistency */
+    background-color: var(--color-bg-card); 
+}
+
+.ql-info-column {
+    flex: 1.2; /* Adjusted info column width */
+    padding: var(--spacing-lg);
+    display: flex;
+    flex-direction: column;
+    min-width: 400px; /* Slightly wider minimum for better information layout */
+    border-left: 1px solid var(--color-border-subtle);
+    background-color: var(--color-bg-light-fade); /* Slightly different background for info */
+}
+
+/* --- Media Section --- */
+.ql-main-media {
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    overflow: hidden;
+    border-radius: var(--border-radius-sm);
+    margin-bottom: var(--spacing-sm);
+    background-color: #000; /* Ensure video background is black */
+    position: relative; /* For media overlay positioning */
+}
+.ql-main-media-element {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.ql-thumbnails {
+    display: flex;
+    gap: var(--spacing-xs);
+    overflow-x: auto;
+    padding-bottom: var(--spacing-xs);
+    border-top: 1px solid var(--color-border-subtle);
+    padding-top: var(--spacing-sm);
+}
+
+.ql-thumbnail-item {
+    min-width: 100px; /* Larger thumbnails for better preview */
+    max-width: 100px;
+    height: 56px; /* 16:9 ratio for 100px width */
+    overflow: hidden;
+    border-radius: var(--border-radius-xs);
+    cursor: pointer;
+    border: 2px solid transparent;
+    transition: border-color 0.2s;
+    position: relative; /* IMPORTANT: for overlay positioning */
+}
+
+.ql-thumbnail-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.ql-thumbnail-item:hover,
+.ql-thumbnail-item.active {
+    border-color: var(--color-secondary-accent); /* Use cyan accent for active border */
+}
+
+/* --- Thumbnail Overlays (New Feature) --- */
+
+.ql-thumbnail-item .media-overlay {
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 10;
+    pointer-events: none;
+}
+
+.ql-thumbnail-item .video-overlay {
+    /* Smaller icon for the thumbnail */
+    color: var(--color-video-overlay);
+    font-size: 1.5rem; 
+}
+.ql-thumbnail-item .gif-overlay {
+    /* GIF tag badge at center */
+    background-color: var(--color-gif-tag);
+    color: var(--color-bg-dark);
+    padding: 2px 6px;
+    border-radius: var(--border-radius-xs);
+    font-weight: 700;
+    font-size: 0.7rem;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    position: absolute; /* Override .media-overlay defaults for badge positioning */
+    bottom: 5px;
+    right: 5px;
+    top: auto;
+    left: auto;
+    transform: translate(0, 0); 
+}
+
+
+/* --- Info Section --- */
+.ql-title {
+    font-size: 1.8rem; /* Slightly smaller for better fit */
+    font-weight: 700;
+    margin-bottom: var(--spacing-xs);
+    color: var(--color-text-light);
+}
+
+.ql-tagline {
+    font-size: 1rem;
+    color: var(--color-text-muted);
+}
+
+.ql-info-scrollable {
+    flex-grow: 1;
+    overflow-y: auto;
+    padding-right: var(--spacing-xs);
+    /* Add some padding to prevent content from touching the button at the bottom */
+    padding-bottom: var(--spacing-md);
+}
+
+.ql-section-title {
+    font-size: 1.15rem; /* Slightly smaller */
+    font-weight: 600;
+    color: var(--color-secondary-accent); /* Use cyan for section titles */
+    margin-top: var(--spacing-sm);
+    margin-bottom: var(--spacing-sm);
+}
+
+.ql-specs p {
+    margin-bottom: 0.5rem;
+    color: var(--color-text-muted);
+}
+.ql-specs strong {
+    color: var(--color-text-light);
+}
+
+.ql-features-list {
+    list-style: none;
+    padding-left: 0;
+}
+.ql-features-list li {
+    position: relative;
+    padding-left: var(--spacing-md);
+    margin-bottom: 0.25rem;
+    color: var(--color-text-light);
+    font-size: 0.95rem;
+}
+.ql-features-list li::before {
+    content: "\f00c";
+    font-family: "Font Awesome 6 Free";
+    font-weight: 900;
+    color: var(--color-primary-accent);
+    position: absolute;
+    left: 0;
+    top: 0;
+    font-size: 0.8rem;
+}
+
+.ql-summary {
+    color: var(--color-text-muted);
+    font-size: 0.9rem;
+}
+
+/* --- Action Button (ASSET STORE BUTTON) --- */
+.ql-info-actions {
+    padding-top: var(--spacing-md);
+    margin-top: auto; /* Pushes action section to the bottom */
+    border-top: 1px solid var(--color-border-subtle);
+}
+
+.ql-details-btn {
+    display: block;
+    width: 100%;
+    text-align: center;
+    padding: 1rem; /* Larger padding for prominent button */
+    border-radius: var(--border-radius-sm);
+    font-weight: 700;
+    font-size: 1rem;
+    transition: background-color 0.2s, transform 0.2s, box-shadow 0.2s;
+    background-color: var(--color-primary-accent);
+    color: white;
+    box-shadow: 0 4px 15px rgba(0, 123, 255, 0.4);
+}
+.ql-details-btn:hover {
+    background-color: #0056b3;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(0, 123, 255, 0.6);
+    text-decoration: none;
+}
+
+/* --- Gallery Card Quick Look Button --- */
+.quick-look-btn {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.75);
+    color: var(--color-text-light);
+    border: none;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 0.75rem 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1rem; /* Made font larger */
+    font-weight: 600; /* Made font bolder */
+    letter-spacing: 0.05em; /* Added letter spacing for UI feel */
+    text-transform: uppercase;
+    cursor: pointer;
+    opacity: 0; /* Hidden by default */
+    pointer-events: none;
+    transition: opacity 0.3s ease, transform 0.3s ease;
+    transform: translateY(100%); /* Start off-screen at the bottom */
+    z-index: 15;
+}
+
+.project-card-wrapper:hover .quick-look-btn {
+    opacity: 1;
+    pointer-events: auto;
+    transform: translateY(0); /* Slide into view */
+}
+
+/* Add space between icon and text */
+.quick-look-btn i {
+    margin-right: 0.6rem; 
+}
+
+/* --- Responsive Layout for Quick View --- */
+@media (max-width: 992px) {
+    .quick-look-content {
+        flex-direction: column;
+        max-height: 95vh;
+        width: 90%;
+    }
+    .ql-media-column {
+        min-height: 300px;
+        flex: none;
+        padding-bottom: 0;
+    }
+    .ql-info-column {
+        min-width: initial;
+        flex: none;
+        padding-top: var(--spacing-sm);
+    }
+}
+@media (max-width: 600px) {
+    .ql-media-column {
+        min-height: 200px;
+    }
+    .ql-thumbnails {
+        justify-content: flex-start;
+        flex-wrap: nowrap;
+    }
+    .ql-thumbnail-item {
+        min-width: 80px;
+        max-width: 80px;
+        height: 45px;
+    }
+}

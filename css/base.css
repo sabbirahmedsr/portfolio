@@ -1,6 +1,6 @@
 /* ==========================================================================
-   Base & Global Styles
-   ========================================================================== */
+    Base & Global Styles
+    ========================================================================== */
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
 
 :root {
@@ -11,7 +11,9 @@
     --color-text-light: #e0e0e0;
     --color-text-muted: #a0a0a0;
     --color-primary-accent: #007bff; /* Unity Blue */
-    --color-secondary-accent: #00bcd4; /* Cyan Accent */
+    --color-secondary-accent: #00bcd4; /* Cyan Accent (Used for highlights) */
+    --color-video-overlay: #ff0000; /* Red for play button */
+    --color-gif-tag: #ff9900; /* Amber/Orange for GIF tag */
     --color-border-subtle: #333333;
     --color-hover-highlight: #282828;
     --color-filter-bg: #282828;
@@ -22,12 +24,14 @@
     --spacing-sm: 1rem;
     --spacing-md: 1.5rem;
     --spacing-lg: 2rem;
+    --border-radius-xs: 2px; /* New small radius for thumbnails */
     --border-radius-sm: 4px;
     --border-radius-md: 8px;
 
     /* Shadows */
     --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.4);
     --shadow-md: 0 5px 15px rgba(0, 0, 0, 0.5);
+    --shadow-lg: 0 10px 30px rgba(0, 0, 0, 0.7); /* For asset store cards */
 }
 
 * {
@@ -56,8 +60,6 @@ a:hover {
 }
 
 .app-container {
-    max-width: 1400px;
-    margin: 0 auto;
     padding: var(--spacing-md) var(--spacing-lg);
     min-height: 100vh;
 }
@@ -84,6 +86,155 @@ a:hover {
     margin-bottom: var(--spacing-lg);
     border-bottom: 1px solid var(--color-border-subtle);
     padding-bottom: var(--spacing-sm);
+}
+
+/* --- Project Card & Gallery Styles (ASSET STORE LOOK) --- */
+
+.project-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: var(--spacing-lg);
+    padding: var(--spacing-lg) 0;
+}
+
+.project-card-wrapper {
+    position: relative;
+    background-color: var(--color-bg-card);
+    border-radius: var(--border-radius-md);
+    overflow: hidden;
+    box-shadow: var(--shadow-md);
+    transition: transform 0.2s ease, box-shadow 0.2s ease, background-color 0.2s;
+    border: 1px solid var(--color-border-subtle);
+}
+
+.project-card-wrapper:hover {
+    box-shadow: var(--shadow-lg);
+    background-color: var(--color-hover-highlight);
+    border-color: var(--color-secondary-accent);
+}
+
+.project-card {
+    display: block;
+    color: var(--color-text-light);
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+}
+.project-card:hover {
+    text-decoration: none; /* Remove underline on hover */
+}
+
+
+/* --- Card Media Section (ASSET STORE SCREENSHOT) --- */
+.card-image-wrapper {
+    position: relative;
+    width: 100%;
+    /* Standard preview aspect ratio (e.g., 16:9 or 4:3) */
+    aspect-ratio: 16 / 9; 
+    overflow: hidden;
+    border-bottom: 1px solid var(--color-border-subtle);
+}
+
+.card-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+}
+
+.project-card-wrapper:hover .card-image {
+    /* transform: scale(1.03); */ /* Hover zoom disabled per request */
+}
+
+
+/* --- Media Overlay Styles (New Feature) --- */
+.media-overlay {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 5;
+    pointer-events: none;
+    transition: opacity 0.3s;
+}
+
+/* Video Overlay (Play Icon) */
+.video-overlay {
+    color: var(--color-video-overlay);
+    font-size: 3rem;
+    text-shadow: 0 0 10px rgba(0, 0, 0, 0.9);
+}
+.video-overlay i {
+    opacity: 0.9;
+    transition: opacity 0.2s;
+}
+.card-image-wrapper:hover .video-overlay i {
+    opacity: 1; /* Highlight icon on hover */
+}
+
+
+/* GIF Overlay (GIF Tag) */
+.gif-overlay {
+    background-color: var(--color-gif-tag);
+    color: var(--color-bg-dark);
+    padding: 3px 8px;
+    border-radius: var(--border-radius-xs);
+    font-weight: 700;
+    font-size: 0.8rem;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    /* Move to bottom right for a different look, like a badge */
+    top: auto;
+    bottom: var(--spacing-sm);
+    left: auto;
+    right: var(--spacing-sm);
+    transform: translate(0, 0); 
+}
+
+/* --- Card Info (ASSET STORE LOOK) --- */
+.card-info {
+    padding: var(--spacing-md);
+    flex-grow: 1;
+}
+
+.card-title {
+    font-size: 1.2rem;
+    font-weight: 600;
+    margin-bottom: var(--spacing-xs);
+    color: var(--color-text-light);
+}
+
+.card-tagline {
+    font-size: 0.9rem;
+    color: var(--color-text-muted);
+    margin-bottom: var(--spacing-sm);
+}
+
+.card-meta {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.8rem;
+    color: var(--color-text-muted);
+    padding-top: var(--spacing-sm);
+    border-top: 1px dashed var(--color-border-subtle);
+    margin-top: auto; /* Pushes meta to the bottom */
+}
+.card-meta i {
+    margin-right: 5px;
+    color: var(--color-secondary-accent);
+}
+
+/* --- Tech Tags & Feature Lists (ASSET STORE LOOK) --- */
+.tech-tag {
+    display: inline-block;
+    background-color: var(--color-bg-light-fade);
+    color: var(--color-text-muted);
+    padding: 4px 8px;
+    border-radius: var(--border-radius-xs);
+    font-size: 0.75rem;
+    margin: 3px;
+    border: 1px solid var(--color-border-subtle);
+    white-space: nowrap;
 }
 
 /* --- Responsiveness --- */

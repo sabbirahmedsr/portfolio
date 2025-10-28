@@ -1,20 +1,10 @@
 [
     {
         "id": "hl-dolphin-app-mrtk3",
-        "title": "HL Dolphin App (MRTK3)",
-        "tagline": "Augmented Reality app for HoloLens 2.",
-        "previewImage": "project/HL Dolphin App MRTK3/preview.png",
-        "projectConfigPath": "project/HL Dolphin App MRTK3/project-info.json", 
-        "year": 2025,
-        "platforms": ["HoloLens 2"]
+        "projectConfigPath": "HL Dolphin App MRTK3/config.json"
     },
     {
         "id": "vr-q2-firefighter",
-        "title": "VR Q2 Firefighter Simulator",
-        "tagline": "High-fidelity training environment for the Meta Quest 2.",
-        "previewImage": "project/VR Q2 Firefighter/preview.png",
-        "projectConfigPath": "project/VR Q2 Firefighter/project-info.json", 
-        "year": 2023,
-        "platforms": ["Meta Quest 2", "PC VR"]
+        "projectConfigPath": "VR Q2 Firefighter/config.json"
     }
 ]

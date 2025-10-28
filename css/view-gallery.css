@@ -122,14 +122,6 @@
     appearance: none;
 }
 
-#project-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-    gap: var(--spacing-lg);
-    justify-content: center; /* Center the grid items */
-    padding: var(--spacing-lg) 0;
-}
-
 .project-card-wrapper {
     position: relative;
     /* Inherits background, border-radius, box-shadow, and hover effects from base.css */

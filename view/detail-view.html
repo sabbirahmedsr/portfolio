@@ -1,37 +1,32 @@
 <section id="detail-view">
-    <h1 id="project-title" class="page-title"></h1>
-    <p id="project-tagline" class="page-subtitle"></p>
-
-    <div id="hero-media" class="hero-media">
+    <div class="detail-grid-layout">
+        <!-- Media Viewer -->
+        <div class="detail-media-viewer">
+            <div id="detail-main-media" class="detail-main-media"></div>
+            <div id="detail-thumbnails" class="detail-thumbnails"></div>
         </div>
-    
-    <div class="detail-content">
-        <div class="main-content">
-            <p id="project-summary" class="project-summary-text"></p>
+        <!-- README Content -->
+        <div id="project-description-md" class="readme-content"></div>
+
+        <!-- Info Sidebar (Right) -->
+        <div class="detail-info-sidebar">
+            <h1 id="project-title" class="sidebar-title"></h1>
+            <p id="project-tagline" class="sidebar-tagline"></p>
             
-            <h2 class="section-heading">Project Overview</h2>
-            <div id="project-description-md" class="project-description-md"></div>
-            
-            <h2 class="section-heading">Media Gallery</h2>
-            <div id="media-gallery"></div>
+            <div class="sidebar-section">
+                <h4 class="sidebar-section-title">Summary</h4>
+                <p id="project-summary" class="sidebar-summary"></p>
+            </div>
+
+            <div class="sidebar-section">
+                <h4 class="sidebar-section-title">Specifications</h4>
+                <div id="project-specs" class="sidebar-specs"></div>
+            </div>
+
+            <div class="sidebar-section">
+                <h4 class="sidebar-section-title">Quick Links</h4>
+                <div id="quick-links" class="sidebar-links"></div>
+            </div>
         </div>
-
-        <div class="specs-column">
-            <div class="specs-box timeline-box">
-                <h3 class="box-title"><i class="fas fa-clock"></i> Project Timeline</h3>
-                <div id="project-timeline"></div>
-            </div>
-            
-            <div class="specs-box tech-stack-box">
-                <h3 class="box-title"><i class="fas fa-tools"></i> Tech Stack</h3>
-                <div id="tech-stack-list"></div>
-            </div>
-
-            <div class="specs-box links-box">
-                <h3 class="box-title"><i class="fas fa-link"></i> Quick Links</h3>
-                <div id="quick-links"></div>
-            </div>
-            
-            </div>
     </div>
 </section>

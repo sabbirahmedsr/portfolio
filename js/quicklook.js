@@ -4,7 +4,7 @@
 ************************************************************/
 
 import { masterProjectList, views } from './app.js';
-import { inferMediaType, convertToYoutubeEmbedUrl, parseDate, formatDateShort } from './utils.js';
+import { inferMediaType, convertToYoutubeEmbedUrl, parseDate, formatDateShort, getYoutubeThumbnailUrl } from './utils.js';
 
 let currentProjectConfig = null;
 let projectBasePath = '';
@@ -173,6 +173,11 @@ function renderQuickLookMedia() {
     mainMediaContainer.appendChild(mediaElement);
 
     // Render thumbnails
+    // Create a wrapper inside the container to handle centering
+    const thumbnailsWrapper = document.createElement('div');
+    thumbnailsWrapper.className = 'ql-thumbnails-wrapper';
+    thumbnailsContainer.appendChild(thumbnailsWrapper);
+
     currentProjectConfig.media.forEach((mediaItem, index) => {
         const thumbUrl = getFinalUrl(mediaItem.url);
         const thumbType = inferMediaType(thumbUrl);
@@ -180,11 +185,24 @@ function renderQuickLookMedia() {
         let thumbDisplayImageUrl = thumbUrl;
         let mediaOverlayHtml = '';
 
+        if (thumbType === 'gif') {
+            // For GIFs, use the GIF itself as the thumbnail.
+            // This will make the thumbnail animated.
+            thumbDisplayImageUrl = thumbUrl;
+        } else if (mediaItem.thumbnailUrl) {
+            // For other types (like video), use an explicit thumbnail if provided.
+            thumbDisplayImageUrl = getFinalUrl(mediaItem.thumbnailUrl);
+        } else if (thumbType === 'video') {
+            // Otherwise, for videos, auto-generate from YouTube or fallback.
+            const youtubeThumbUrl = getYoutubeThumbnailUrl(thumbUrl);
+            thumbDisplayImageUrl = youtubeThumbUrl || getFinalUrl(currentProjectConfig.previewImage);
+        }
+
+        // Determine the overlay based on the original media type
         if (thumbType === 'video') {
-            thumbDisplayImageUrl = getFinalUrl(currentProjectConfig.previewImage);
-            mediaOverlayHtml = '<div class="media-overlay video-overlay"><i class="fas fa-play-circle"></i></div>';
+            mediaOverlayHtml = `<div class="media-overlay video-overlay"></div>`;
         } else if (thumbType === 'gif') {
-            mediaOverlayHtml = '<div class="media-overlay gif-overlay">GIF</div>';
+            mediaOverlayHtml = `<div class="media-overlay gif-overlay">GIF</div>`;
         }
 
         const thumbnail = document.createElement('div');
@@ -202,7 +220,7 @@ function renderQuickLookMedia() {
             thumbnail.classList.add('active');
         });
         
-        thumbnailsContainer.appendChild(thumbnail);
+        thumbnailsWrapper.appendChild(thumbnail);
         if (index === 0) thumbnail.classList.add('active');
     });
 }

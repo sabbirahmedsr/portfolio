@@ -95,18 +95,23 @@
 }
 
 .ql-thumbnails {
-    display: flex;
-    gap: var(--spacing-xs);
     overflow-x: auto;
     padding-bottom: var(--spacing-xs);
     border-top: 1px solid var(--color-border-subtle);
-    padding-top: var(--spacing-sm);
+    padding-top: var(--spacing-sm); 
+}
+
+.ql-thumbnails-wrapper {
+    display: flex;
+    justify-content: center;
+    gap: var(--spacing-xs);
+    padding: 0 var(--spacing-xs); /* Add padding to prevent items from touching edges on scroll */
 }
 
 .ql-thumbnail-item {
-    min-width: 100px; /* Larger thumbnails for better preview */
-    max-width: 100px;
-    height: 56px; /* 16:9 ratio for 100px width */
+    min-width: 120px; /* Reduced size */
+    max-width: 120px;
+    height: 80px; /* 3:2 ratio */
     overflow: hidden;
     border-radius: var(--border-radius-xs);
     cursor: pointer;
@@ -137,26 +142,45 @@
 }
 
 .ql-thumbnail-item .video-overlay {
-    /* Smaller icon for the thumbnail */
-    color: var(--color-video-overlay);
-    font-size: 1.5rem; 
+    /* Modern YouTube Icon Style */
+    width: 36px;
+    height: 25px;
+    background-color: #FF0000;
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.2s ease;
+}
+
+.ql-thumbnail-item:hover .video-overlay {
+    transform: translate(-50%, -50%) scale(1.1);
+}
+
+.ql-thumbnail-item .video-overlay::after {
+    content: '';
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-width: 6px 0 6px 10px;
+    border-color: transparent transparent transparent white;
 }
 .ql-thumbnail-item .gif-overlay {
-    /* GIF tag badge at center */
-    background-color: var(--color-gif-tag);
-    color: var(--color-bg-dark);
+    /* Position in corner like the main gallery card */
+    background-color: var(--color-bg-light-fade);
+    color: var(--color-text-muted);
     padding: 2px 6px;
     border-radius: var(--border-radius-xs);
     font-weight: 700;
     font-size: 0.7rem;
     letter-spacing: 0.05em;
     text-transform: uppercase;
-    position: absolute; /* Override .media-overlay defaults for badge positioning */
-    bottom: 5px;
-    right: 5px;
+    position: absolute;
     top: auto;
     left: auto;
-    transform: translate(0, 0); 
+    bottom: 5px;
+    right: 5px;
+    transform: none;
 }
 
 
@@ -368,8 +392,8 @@
         flex-wrap: nowrap;
     }
     .ql-thumbnail-item {
-        min-width: 80px;
-        max-width: 80px;
-        height: 45px;
+        min-width: 90px;
+        max-width: 90px;
+        height: 60px; /* 3:2 ratio */
     }
 }

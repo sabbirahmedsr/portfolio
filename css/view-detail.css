@@ -1,230 +1,218 @@
 /* ==========================================================================
-    View: Project Detail (Updated and Consolidated)
-    Description: Contains all styles for the single project detail page, previously split between detail.css and view-detail.css.
+    View: Project Detail (Asset Store Layout)
     ========================================================================== */
-.detail-view {
-    padding-top: var(--spacing-lg);
-}
 
-.detail-content {
+.detail-grid-layout {
     display: grid;
-    grid-template-columns: 2.5fr 1fr; /* Main Content | Sidebar */
+    grid-template-columns: minmax(0, 2.5fr) 1fr; /* Reduced width of main content column */
     gap: var(--spacing-lg);
-    margin-top: var(--spacing-lg);
+    align-items: start; /* Align items to the top */
+    max-width: 1600px; /* Add a max-width to the layout for very wide screens */
+    margin: 0 auto; /* Center the layout */
 }
 
-/* --- Hero Media (Main Image/Video) --- */
-.hero-media {
-    width: 100%;
-    aspect-ratio: 16 / 9;
-    background-color: #000;
+.detail-media-viewer {
+    background-color: var(--color-bg-card);
     border-radius: var(--border-radius-md);
-    overflow: hidden;
+    padding: var(--spacing-md);
     margin-bottom: var(--spacing-lg);
-    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.7); /* Stronger shadow for main media */
-    position: relative; /* IMPORTANT: For media overlays */
-    cursor: zoom-in; /* Indicate media is clickable (for Lightbox) */
+    border: 1px solid var(--color-border-subtle);
 }
-
-.hero-media img,
-.hero-media video {
+.detail-main-media {
+    width: 100%;
+    aspect-ratio: 3 / 2;
+    overflow: hidden;
+    border-radius: var(--border-radius-sm);
+    margin-bottom: var(--spacing-sm);
+    background-color: #000;
+}
+.detail-main-media img,
+.detail-main-media iframe {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    display: block;
 }
-
-/* Apply overlays to Hero Media */
-.hero-media .media-overlay.gif-overlay {
-    top: auto;
-    bottom: var(--spacing-md);
-    left: var(--spacing-md);
-    right: auto;
-}
-.hero-media .media-overlay.video-overlay {
-    /* Uses default centered positioning from base.css */
-    font-size: 4rem; /* Larger play icon for the main video */
-}
-
-
-/* --- Project Description and Specs --- */
-.section-heading {
-    font-size: 2rem;
-    font-weight: 600;
-    color: var(--color-text-light);
-    margin-top: var(--spacing-lg);
-    margin-bottom: var(--spacing-sm);
-    padding-bottom: var(--spacing-xs);
-    border-bottom: 2px solid var(--color-primary-accent); /* Highlight heading */
-}
-
-.project-summary-text {
-    font-size: 1.2rem;
-    font-weight: 400;
-    margin-bottom: var(--spacing-lg);
-    padding: var(--spacing-md);
-    background-color: var(--color-bg-light-fade);
-    border-left: 5px solid var(--color-secondary-accent); /* Stronger accent border */
-    border-radius: var(--border-radius-md);
-    box-shadow: var(--shadow-sm);
-}
-
-/* Markdown/Preformatted text (for README content) */
-pre {
-    white-space: pre-wrap;
-    background-color: var(--color-bg-card);
-    padding: var(--spacing-md);
-    border-radius: var(--border-radius-md);
-    border: 1px solid var(--color-border-subtle);
+.detail-thumbnails {
     overflow-x: auto;
-    font-family: 'Fira Code', 'Cascadia Code', 'Consolas', monospace;
-    color: var(--color-text-light);
-    box-shadow: var(--shadow-sm);
+    padding-bottom: var(--spacing-xs);
+}
+.detail-thumbnails-wrapper {
+    display: flex;
+    justify-content: flex-start; /* Align thumbnails to the left */
+    gap: var(--spacing-xs);
+}
+.detail-thumbnail-item {
+    min-width: 142px; /* Slightly larger thumbnails */
+    max-width: 142px;
+    height: 95px; /* 3:2 ratio */
+    overflow: hidden;
+    border-radius: var(--border-radius-xs);
+    cursor: pointer;
+    border: 2px solid transparent;
+    transition: border-color 0.2s;
+    position: relative;
+}
+.detail-thumbnail-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+.detail-thumbnail-item:hover,
+.detail-thumbnail-item.active {
+    border-color: var(--color-secondary-accent);
 }
 
-/* --- Specs Boxes (Sidebar Content) --- */
-.specs-box {
+/* --- Info Sidebar (Right Column) --- */
+.detail-info-sidebar {
+    /* Explicitly place sidebar in column 2 and make it span 2 rows */
+    grid-column: 2;
+    grid-row: 1 / span 2;
+
     background-color: var(--color-bg-card);
     border: 1px solid var(--color-border-subtle);
-    padding: var(--spacing-md);
     border-radius: var(--border-radius-md);
-    margin-bottom: var(--spacing-lg);
-    box-shadow: var(--shadow-sm);
-    /* Asset Store Look: Optional subtle gradient background */
-    background-image: linear-gradient(180deg, rgba(0,0,0,0.05) 0%, rgba(0,0,0,0) 100%);
+    padding: var(--spacing-md);
+    align-self: start; /* Stick to the top */
+    position: sticky;
+    top: var(--spacing-lg);
 }
 
-.box-title {
-    font-size: 1.3rem;
-    font-weight: 600;
-    color: var(--color-text-light);
-    border-bottom: 1px dashed var(--color-border-subtle);
-    padding-bottom: var(--spacing-xs);
-    margin-top: 0;
-    margin-bottom: var(--spacing-sm);
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
+.sidebar-title {
+    font-size: 1.8rem;
+    font-weight: 700;
+    margin-bottom: 0.25rem;
 }
 
-.box-title i {
-    color: var(--color-secondary-accent); /* Use cyan accent for box icons */
-}
-
-.specs-box p {
-    margin-bottom: var(--spacing-xs);
+.sidebar-tagline {
     color: var(--color-text-muted);
+    margin-bottom: var(--spacing-md);
+    font-size: 1rem;
 }
 
-.specs-box p strong {
+.sidebar-section {
+    padding: var(--spacing-sm) 0;
+    border-top: 1px solid var(--color-border-subtle);
+}
+
+.sidebar-section-title {
+    font-size: 1rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--color-text-muted);
+    margin-bottom: var(--spacing-sm);
+}
+
+.sidebar-summary {
+    font-size: 0.9rem;
     color: var(--color-text-light);
 }
 
-.tech-tag-container {
+.sidebar-specs {
     display: flex;
-    flex-wrap: wrap;
-    margin: calc(var(--spacing-xs) * -1); /* Negative margin to offset tag margin */
+    flex-direction: column;
+    gap: 0.75rem;
 }
 
-/* .tech-tag styles are assumed to be in base.css */
-.tech-tag-container .tech-tag:hover {
-    background-color: var(--color-primary-accent);
+.sidebar-links {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); /* Two columns */
+    gap: var(--spacing-xs);
 }
 
-.quick-link-btn {
+.sidebar-link-btn {
     display: flex;
     align-items: center;
-    justify-content: center;
-    width: 100%;
-    background: linear-gradient(135deg, var(--color-primary-accent) 0%, #0056b3 100%);
-    color: white;
-    padding: var(--spacing-sm) var(--spacing-md);
+    justify-content: center; /* Center content within the button */
+    gap: 0.5rem; /* Space between icon and text */
+    padding: 0.75rem; /* Consistent padding with Quick Look */
+    background-color: var(--color-bg-card); /* Consistent background with Quick Look */
+    color: var(--color-text-muted); /* Consistent text color with Quick Look */
     border-radius: var(--border-radius-sm);
-    margin-bottom: var(--spacing-xs);
-    transition: transform 0.2s, box-shadow 0.2s, background 0.2s;
-    font-weight: 500;
-    box-shadow: 0 4px 10px rgba(0, 123, 255, 0.3);
+    border: 1px solid var(--color-border-subtle); /* Consistent border with Quick Look */
+    transition: all 0.2s ease;
+    font-size: 0.9rem;
+    text-align: center;
 }
 
-.quick-link-btn i {
-    margin-right: var(--spacing-xs);
-}
-
-.quick-link-btn:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 6px 15px rgba(0, 123, 255, 0.5);
-    background: linear-gradient(135deg, var(--color-secondary-accent) 0%, #0097a7 100%);
+.sidebar-link-btn:hover {
+    background-color: var(--color-hover-highlight); /* Consistent hover with Quick Look */
+    color: var(--color-text-light); /* Consistent hover text with Quick Look */
+    border-color: var(--color-secondary-accent); /* Consistent hover border with Quick Look */
     text-decoration: none;
 }
 
-/* --- Media Gallery (Screenshots/Video Previews) --- */
-#media-gallery {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); /* Larger previews */
-    gap: var(--spacing-sm);
-    margin-top: var(--spacing-lg);
+.sidebar-link-btn i {
+    margin-right: var(--spacing-xs);
 }
 
-.gallery-item {
-    position: relative; /* IMPORTANT: for media overlays */
-    width: 100%;
-    aspect-ratio: 16 / 9;
-    overflow: hidden;
+/* --- Rendered README Content --- */
+.readme-content {
+    background-color: var(--color-bg-card);
+    padding: var(--spacing-md);
+    border-radius: var(--border-radius-md);
+    border: 1px solid var(--color-border-subtle);
+}
+
+.readme-content h1, .readme-content h2, .readme-content h3 {
+    font-weight: 600;
+    margin-top: var(--spacing-md);
+    margin-bottom: var(--spacing-sm);
+    padding-bottom: var(--spacing-xs);
+    border-bottom: 1px solid var(--color-border-subtle);
+}
+.readme-content h1 { font-size: 2rem; }
+.readme-content h2 { font-size: 1.75rem; }
+.readme-content h3 { font-size: 1.5rem; }
+
+.readme-content p {
+    margin-bottom: var(--spacing-sm);
+}
+
+.readme-content ul, .readme-content ol {
+    margin-bottom: var(--spacing-sm);
+    padding-left: var(--spacing-md);
+}
+
+.readme-content blockquote {
+    margin: var(--spacing-sm) 0;
+    padding: var(--spacing-xs) var(--spacing-md);
+    border-left: 4px solid var(--color-secondary-accent);
+    background-color: var(--color-bg-light-fade);
+    color: var(--color-text-muted);
+}
+
+.readme-content code {
+    background-color: var(--color-bg-light-fade);
+    padding: 2px 5px;
     border-radius: var(--border-radius-sm);
-    box-shadow: var(--shadow-sm);
-    cursor: zoom-in;
-    transition: transform 0.2s;
-}
-.gallery-item:hover {
-    transform: scale(1.02);
+    font-family: 'Fira Code', monospace;
 }
 
-.gallery-item img {
+.readme-content pre {
+    background-color: #161616;
+    padding: var(--spacing-sm);
+    border-radius: var(--border-radius-sm);
+    overflow-x: auto;
+}
+
+.readme-content pre code {
+    background-color: transparent;
+    padding: 0;
+}
+
+.readme-content table {
     width: 100%;
-    height: 100%;
-    object-fit: cover;
+    border-collapse: collapse;
+    margin-bottom: var(--spacing-sm);
 }
 
-/* Apply overlays to Gallery Items */
-.gallery-item .media-overlay.gif-overlay {
-    top: auto;
-    bottom: var(--spacing-xs);
-    left: var(--spacing-xs);
-    right: auto;
-}
-.gallery-item .media-overlay.video-overlay {
-    /* Uses default centered positioning from base.css */
-    font-size: 2.5rem; /* Medium play icon for previews */
+.readme-content th, .readme-content td {
+    border: 1px solid var(--color-border-subtle);
+    padding: var(--spacing-xs) var(--spacing-sm);
+    text-align: left;
 }
 
-
-/* --- Responsiveness --- */
-@media (max-width: 1200px) {
-    .section-heading {
-        font-size: 1.8rem;
-    }
-}
-
-@media (max-width: 992px) {
-    .detail-content {
-        grid-template-columns: 1fr; /* Stack columns on smaller screens */
-    }
-    .specs-box, .tech-tag-container {
-        margin-bottom: var(--spacing-md);
-    }
-}
-
-@media (max-width: 768px) {
-    .section-heading {
-        font-size: 1.5rem;
-    }
-    .project-summary-text {
-        font-size: 1.1rem;
-    }
-}
-
-@media (max-width: 480px) {
-    #media-gallery {
-        grid-template-columns: 1fr; /* Single column on very small screens */
-    }
+.readme-content th {
+    background-color: var(--color-bg-light-fade);
 }

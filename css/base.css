@@ -60,7 +60,7 @@ a:hover {
 }
 
 .app-container {
-    padding: 0 var(--spacing-lg) var(--spacing-sm) var(--spacing-lg); /* Removed top padding, kept bottom and side padding */
+    padding: var(--spacing-lg) var(--spacing-lg) var(--spacing-sm) var(--spacing-lg); /* Added top padding for space from browser top */
     min-height: 100vh;
 }
 
@@ -91,11 +91,17 @@ a:hover {
 /* --- Project Card & Gallery Styles (ASSET STORE LOOK) --- */
 
 .project-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+    display: flex;
+    flex-wrap: wrap;
     justify-content: center; /* Center the grid items */
     gap: var(--spacing-lg);
     padding: var(--spacing-lg) 0;
+}
+
+/* Set a basis for flex items to behave like grid columns */
+.project-card-wrapper {
+    flex-basis: 340px; /* The minimum width of your cards */
+    flex-grow: 0; /* Prevent cards from growing to fill the row */
 }
 
 .project-card-wrapper {
@@ -172,15 +178,14 @@ a:hover {
 
 /* GIF Overlay (GIF Tag) */
 .gif-overlay {
-    background-color: var(--color-gif-tag);
-    color: var(--color-bg-dark);
+    background-color: var(--color-bg-light-fade);
+    color: var(--color-text-muted);
     padding: 3px 8px;
     border-radius: var(--border-radius-xs);
     font-weight: 700;
     font-size: 0.8rem;
     letter-spacing: 0.05em;
     text-transform: uppercase;
-    /* Move to bottom right for a different look, like a badge */
     top: auto;
     bottom: var(--spacing-sm);
     left: auto;

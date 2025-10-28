@@ -50,16 +50,15 @@ async function loadInitialData() {
  * Main router function that decides which view to render based on the URL hash.
  */
 function router() {
-    const hash = window.location.hash.slice(1) || 'projects'; 
+    const path = window.location.hash.slice(1) || '/';
     appContainer.scrollTop = 0; 
 
-    if (hash === 'projects' || hash === '/') {
-        renderGalleryView();
-    } else if (hash.startsWith('project/')) {
-        const projectId = hash.split('/')[1];
+    if (path.startsWith('/project/')) {
+        const projectId = path.split('/')[2];
         renderDetailView(projectId);
     } else {
-        appContainer.innerHTML = `<section id="${hash}-view" class="static-view"><h1 class="page-title">${hash.charAt(0).toUpperCase() + hash.slice(1)}</h1><p>Content for the ${hash} section will go here.</p></section>`;
+        // Default to gallery view for "/" or any other route
+        renderGalleryView();
     }
 }
 

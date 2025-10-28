@@ -51,6 +51,28 @@ export function convertToYoutubeEmbedUrl(url) {
 }
 
 /**
+ * Extracts the YouTube video ID from various URL formats.
+ * @param {string} url The original YouTube URL.
+ * @returns {string|null} The video ID or null if not found.
+ */
+export function getYoutubeVideoId(url) {
+    if (!url) return null;
+    const youtubeRegex = /(?:https?:\/\/)?(?:www\.)?(?:youtube\.com\/(?:[^\/\n\s]+\/\S+\/|(?:v|e(?:mbed)?)\/|\S*?[?&]v=)|youtu\.be\/)([a-zA-Z0-9_-]{11})/;
+    const match = url.match(youtubeRegex);
+    return match ? match[1] : null;
+}
+
+/**
+ * Generates a YouTube thumbnail URL from a video URL.
+ * @param {string} url The original YouTube URL.
+ * @returns {string|null} The URL for the medium quality thumbnail or null.
+ */
+export function getYoutubeThumbnailUrl(url) {
+    const videoId = getYoutubeVideoId(url);
+    return videoId ? `https://img.youtube.com/vi/${videoId}/mqdefault.jpg` : null;
+}
+
+/**
  * Parses a date string in "dd-mm-yyyy" format.
  * @param {string} dateString - The date string to parse.
  * @returns {Date|null} A Date object or null if invalid.

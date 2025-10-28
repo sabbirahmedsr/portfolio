@@ -1,10 +1,10 @@
 /* *********************************************************
     Module: Detail View Renderer
-    Description: Handles rendering the detailed project view.
+    Description: Handles rendering the detailed project view, inspired by the Quick Look layout.
 ************************************************************/
 
-import { masterProjectList, views } from './app.js';
-import { fetchData, inferMediaType, convertToYoutubeEmbedUrl, parseDate, formatDateLong } from './utils.js';
+import { appContainer, masterProjectList, views } from './app.js';
+import { fetchData, inferMediaType, convertToYoutubeEmbedUrl, parseDate, formatDateLong, getYoutubeThumbnailUrl } from './utils.js';
 import { initLightbox } from './lightbox.js';
 
 /**
@@ -24,93 +24,134 @@ export async function renderDetailView(projectId) {
         const projectBasePath = projectConfig.projectConfigPath.replace('config.json', '');
         
         const readmePath = projectBasePath + 'README.md';
-        const longDescriptionMD = await fetchData(readmePath, 'text');
-        
-        document.getElementById('project-title').textContent = projectConfig.title;
 
+        // --- Populate Info Sidebar ---
+        document.getElementById('project-title').textContent = projectConfig.title;
         const taglineElement = document.getElementById('project-tagline');
         if (projectConfig.tagline) {
             taglineElement.textContent = projectConfig.tagline;
         } else {
-            taglineElement.style.display = 'none';
+            taglineElement.remove();
         }
         document.getElementById('project-summary').textContent = projectConfig.shortDescription;
 
-        const heroImageUrl = projectConfig.previewImage.startsWith('./')
-            ? projectBasePath + projectConfig.previewImage.replace('./', '')
-            : projectConfig.previewImage;
+        // Populate Specs in the sidebar
+        const specsContainer = document.getElementById('project-specs');
+        let specsHTML = '';
+        // Reorder and include all date fields separately
+        const specsData = [
+            { label: 'Unity Version', value: projectConfig.unityVersion },
+            { label: 'Initiation Date', value: formatDateLong(parseDate(projectConfig.InitiationDate)) },
+            { label: 'Start Date', value: formatDateLong(parseDate(projectConfig.DevStartDate)) },
+            { label: 'End Date', value: formatDateLong(parseDate(projectConfig.DevEndDate)) },
+            { label: 'Platform(s)', value: projectConfig.platforms.join(', ') },
+            { label: 'Client', value: projectConfig.client }
+        ];
+        specsData.forEach(item => {
+            if (item.value && item.value !== 'N/A') {
+                specsHTML += `<div class="spec-item"><span class="spec-label">${item.label}</span><span class="spec-value">${item.value}</span></div>`;
+            }
+        });
+        specsContainer.innerHTML = specsHTML;
 
-        document.getElementById('hero-media').innerHTML = `
-            <img src="${heroImageUrl}" alt="${projectConfig.title} Key Art">
-        `;
-
-        document.getElementById('project-description-md').innerHTML = `<pre>${longDescriptionMD}</pre>`; 
-        
-        // Timeline
-        const timelineElement = document.getElementById('project-timeline');
-        let timelineHTML = '';
-        
-        const proposalDate = parseDate(projectConfig.InitiationDate);
-        const startDate = parseDate(projectConfig.DevStartDate);
-        const completionDate = parseDate(projectConfig.DevEndDate);
-
-        if (proposalDate) {
-            timelineHTML += `<p><strong>Proposal Discussion:</strong> ${formatDateLong(proposalDate)}</p>`;
-        }
-        if (startDate) {
-            timelineHTML += `<p><strong>Project Start Time:</strong> ${formatDateLong(startDate)}</p>`;
-        }
-        if (completionDate) {
-            timelineHTML += `<p><strong>Project Completion Time:</strong> ${formatDateLong(completionDate)}</p>`;
-        }
-        timelineElement.innerHTML = timelineHTML;
-
-        // Tech Stack
-        const techStackList = document.getElementById('tech-stack-list');
-        techStackList.innerHTML = projectConfig.techStack.map(t => `<span class="tech-tag">${t}</span>`).join('');
-
-        // Media Gallery
-        const gallery = document.getElementById('media-gallery');
-        gallery.innerHTML = projectConfig.media.map(mediaItem => {
-            const finalUrl = mediaItem.url.startsWith('./') 
-                ? projectBasePath + mediaItem.url.replace('./', '') 
-                : mediaItem.url;
-            
-            const mediaType = inferMediaType(finalUrl);
-            const isVideo = mediaType === 'video';
-            const embedUrl = isVideo ? convertToYoutubeEmbedUrl(finalUrl) : finalUrl;
-            
-            return `
-                <div class="media-preview-wrapper gallery-media-item"
-                     data-url="${embedUrl}"
-                     data-alt="${mediaItem.alt}"
-                     data-type="${mediaType}">
-                    ${isVideo 
-                        ? `<div class="video-overlay"><i class="fas fa-play-circle"></i></div>`
-                        : ''}
-                    <img class="media-preview-image" 
-                         src="${isVideo ? heroImageUrl : finalUrl}" 
-                         alt="${mediaItem.alt}">
-                </div>
-            `;
-        }).join('');
-        
-        // Quick Links
         const linksContainer = document.getElementById('quick-links');
-        
-        const linkHTML = projectConfig.externalLinks
+        linksContainer.innerHTML = projectConfig.externalLinks
             .filter(link => link.url)
             .map(link => {
                 const iconHtml = link.iconClass ? `<i class="${link.iconClass}"></i>` : ''; 
-                return `<a href="${link.url}" target="_blank" class="quick-link-btn">${iconHtml} ${link.label}</a>`;
+                return `<a href="${link.url}" target="_blank" class="sidebar-link-btn">${iconHtml} ${link.label}</a>`;
             }).join('');
-        
-        linksContainer.innerHTML = linkHTML;
 
-        initLightbox();
+        // --- Render Main Content Column ---
+        renderDetailMedia(projectConfig, projectBasePath);
+
+        // Fetch and render README.md as HTML using marked.js
+        const longDescriptionMD = await fetchData(readmePath, 'text');
+        document.getElementById('project-description-md').innerHTML = marked.parse(longDescriptionMD);
 
     } catch (error) {
         appContainer.innerHTML = `<p class="error-message">Error loading project data for ${projectId}.</p>`;
         console.error(`Error loading project ${projectId}:`, error);
     }
+}
+
+/**
+ * Renders the main media and thumbnails for the detail view.
+ */
+function renderDetailMedia(projectConfig, projectBasePath) {
+    const mainMediaContainer = document.getElementById('detail-main-media');
+    const thumbnailsContainer = document.getElementById('detail-thumbnails');
+    if (!mainMediaContainer || !thumbnailsContainer) return;
+
+    mainMediaContainer.innerHTML = '';
+    thumbnailsContainer.innerHTML = '';
+
+    if (!projectConfig.media || projectConfig.media.length === 0) return;
+
+    const getFinalUrl = (url) => url.startsWith('./') ? projectBasePath + url.replace('./', '') : url;
+
+    const createMediaElement = (url, alt, type) => {
+        if (type === 'video') {
+            const iframe = document.createElement('iframe');
+            iframe.src = convertToYoutubeEmbedUrl(url);
+            iframe.setAttribute('frameborder', '0');
+            iframe.setAttribute('allow', 'autoplay; encrypted-media; picture-in-picture');
+            iframe.setAttribute('allowfullscreen', '');
+            return iframe;
+        } else {
+            const img = document.createElement('img');
+            img.src = url;
+            img.alt = alt;
+            return img;
+        }
+    };
+
+    // Set the first media item as the main view
+    const firstMedia = projectConfig.media[0];
+    const firstMediaUrl = getFinalUrl(firstMedia.url);
+    const firstMediaType = inferMediaType(firstMediaUrl);
+    mainMediaContainer.appendChild(createMediaElement(firstMediaUrl, firstMedia.alt, firstMediaType));
+
+    // Render thumbnails
+    const thumbnailsWrapper = document.createElement('div');
+    thumbnailsWrapper.className = 'detail-thumbnails-wrapper';
+    thumbnailsContainer.appendChild(thumbnailsWrapper);
+
+    projectConfig.media.forEach((mediaItem, index) => {
+        const thumbUrl = getFinalUrl(mediaItem.url);
+        const thumbType = inferMediaType(thumbUrl);
+        
+        let thumbDisplayImageUrl = thumbUrl;
+        let mediaOverlayHtml = '';
+
+        if (thumbType === 'gif') {
+            thumbDisplayImageUrl = thumbUrl;
+        } else if (thumbType === 'video') {
+            // For videos, first try to get an auto-generated YouTube thumbnail.
+            // If that fails (e.g., not a YouTube video), fall back to the project's main preview image.
+            const youtubeThumbUrl = getYoutubeThumbnailUrl(thumbUrl);
+            thumbDisplayImageUrl = youtubeThumbUrl || getFinalUrl(projectConfig.previewImage);
+        }
+
+        if (thumbType === 'video') {
+            mediaOverlayHtml = `<div class="media-overlay video-overlay"></div>`;
+        } else if (thumbType === 'gif') {
+            mediaOverlayHtml = `<div class="media-overlay gif-overlay">GIF</div>`;
+        }
+
+        const thumbnail = document.createElement('div');
+        thumbnail.className = 'detail-thumbnail-item';
+        thumbnail.innerHTML = `<img src="${thumbDisplayImageUrl}" alt="${mediaItem.alt}">${mediaOverlayHtml}`;
+        
+        thumbnail.addEventListener('click', () => {
+            mainMediaContainer.innerHTML = '';
+            mainMediaContainer.appendChild(createMediaElement(thumbUrl, mediaItem.alt, thumbType));
+            
+            document.querySelectorAll('.detail-thumbnail-item').forEach(t => t.classList.remove('active'));
+            thumbnail.classList.add('active');
+        });
+        
+        thumbnailsWrapper.appendChild(thumbnail);
+        if (index === 0) thumbnail.classList.add('active');
+    });
 }

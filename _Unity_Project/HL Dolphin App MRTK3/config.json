@@ -5,7 +5,7 @@
     "previewImage": "./preview.png",   
 
     "client": "AZMI STUDIO", 
-    "platforms": ["HoloLens 2"],
+    "platforms": ["HoloLens"],
     
     "InitiationDate": "01-09-2025",
     "DevStartDate": "01-10-2025",

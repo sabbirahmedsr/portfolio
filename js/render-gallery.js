@@ -125,15 +125,18 @@ function populateFilters(filterState = { year: 'all', platform: 'all' }) {
     const platformFilter = document.getElementById('filter-platform');
     const searchInput = document.getElementById('search-input');
 
-    const years = [...new Set(masterProjectList.map(p => {
+    // Get projects for the current category to populate filters accurately
+    const projectsForCurrentCategory = masterProjectList.filter(p => p.category === currentCategory);
+
+    const years = [...new Set(projectsForCurrentCategory.map(p => {
         const date = parseDate(p.DevEndDate);
         return date ? date.getFullYear() : null;
     }).filter(year => year !== null))]
     .sort((a, b) => b - a);
-    const platforms = [...new Set(masterProjectList.flatMap(p => p.platforms))].sort();
+    const platforms = [...new Set(projectsForCurrentCategory.flatMap(p => p.platforms))].sort();
 
     years.forEach(year => {
-        const option = new Option(year, year);
+        const option = new Option(year, year, false, year == filterState.year);
         yearFilter.add(option);
     });
 
@@ -152,7 +155,8 @@ function populateFilters(filterState = { year: 'all', platform: 'all' }) {
 
         const filterState = { year: selectedYear, platform: selectedPlatform };
 
-        let filteredList = masterProjectList;
+        // Start with projects from the current category, not the master list
+        let filteredList = masterProjectList.filter(p => p.category === currentCategory);
 
         if (selectedYear !== 'all') {
             filteredList = filteredList.filter(p => {
@@ -161,7 +165,7 @@ function populateFilters(filterState = { year: 'all', platform: 'all' }) {
             });
         }
 
-        if (selectedPlatform !== 'all') {
+        if (selectedPlatform !== 'all' && currentCategory !== '_Blender_Project') {
             filteredList = filteredList.filter(p => p.platforms.includes(selectedPlatform));
         }
 

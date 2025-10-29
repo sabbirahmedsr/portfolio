@@ -6,8 +6,8 @@
 
     "client": "AZMI STUDIO", 
     "platforms": [
-        "Windows 10",
-        "HoloLens 2"
+        "Windows",
+        "HoloLens"
     ],
     
     "InitiationDate": "01-01-2000",

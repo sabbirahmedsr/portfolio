@@ -101,16 +101,16 @@ export function renderGalleryView(filteredList = masterProjectList, filterState 
     const unityBtn = document.getElementById('unity-portfolio-btn');
     const blenderBtn = document.getElementById('blender-portfolio-btn');
 
-    if (currentCategory === '_Unity_Project') {
+    if (currentCategory === 'a_unity') {
         unityBtn.classList.add('active');
         blenderBtn.classList.remove('active');
-    } else if (currentCategory === '_Blender_Project') {
+    } else if (currentCategory === 'b_blender') {
         blenderBtn.classList.add('active');
         unityBtn.classList.remove('active');
     }
 
     const platformFilterGroup = document.getElementById('platform-filter-group');
-    if (currentCategory === '_Blender_Project') {
+    if (currentCategory === 'b_blender') {
         platformFilterGroup.style.display = 'none';
     } else {
         platformFilterGroup.style.display = 'flex';
@@ -165,7 +165,7 @@ function populateFilters(filterState = { year: 'all', platform: 'all' }) {
             });
         }
 
-        if (selectedPlatform !== 'all' && currentCategory !== '_Blender_Project') {
+        if (selectedPlatform !== 'all' && currentCategory !== 'b_blender') {
             filteredList = filteredList.filter(p => p.platforms.includes(selectedPlatform));
         }
 

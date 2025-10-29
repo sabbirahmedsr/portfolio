@@ -14,7 +14,7 @@ export const views = {};
 // Determine base path for asset loading. Handles GitHub Pages deployment.
 // Use relative paths to ensure assets load correctly on both local server and GitHub Pages.
 const basePath = '';
-export let currentCategory = '_Unity_Project'; // Default category
+export let currentCategory = 'a_unity'; // Default category
 
 /**
  * Processes a project category by fetching its library and configuration files.
@@ -46,8 +46,8 @@ async function processProjectCategory(category) {
  */
 async function loadInitialData() {
     try {
-        const unityProjects = await processProjectCategory('_Unity_Project');
-        const blenderProjects = await processProjectCategory('_Blender_Project');
+        const unityProjects = await processProjectCategory('a_unity');
+        const blenderProjects = await processProjectCategory('b_blender');
         masterProjectList = [...unityProjects, ...blenderProjects];
 
         views.gallery = await fetchData('view/gallery-view.html', 'text');
@@ -69,10 +69,10 @@ async function loadInitialData() {
 function setupPortfolioSwitcher() {
     appContainer.addEventListener('click', (e) => {
         if (e.target.id === 'unity-portfolio-btn') {
-            currentCategory = '_Unity_Project';
+            currentCategory = 'a_unity';
             router();
         } else if (e.target.id === 'blender-portfolio-btn') {
-            currentCategory = '_Blender_Project';
+            currentCategory = 'b_blender';
             router();
         }
     });

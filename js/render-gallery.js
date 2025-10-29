@@ -101,16 +101,16 @@ export function renderGalleryView(filteredList = masterProjectList, filterState 
     const unityBtn = document.getElementById('unity-portfolio-btn');
     const blenderBtn = document.getElementById('blender-portfolio-btn');
 
-    if (currentCategory === 'unity') {
+    if (currentCategory === '_Unity_Project') {
         unityBtn.classList.add('active');
         blenderBtn.classList.remove('active');
-    } else {
+    } else if (currentCategory === '_Blender_Project') {
         blenderBtn.classList.add('active');
         unityBtn.classList.remove('active');
     }
 
     const platformFilterGroup = document.getElementById('platform-filter-group');
-    if (currentCategory === 'blender') {
+    if (currentCategory === '_Blender_Project') {
         platformFilterGroup.style.display = 'none';
     } else {
         platformFilterGroup.style.display = 'flex';

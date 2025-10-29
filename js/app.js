@@ -10,7 +10,7 @@ import { renderDetailView } from './render-detail.js';
 export const appContainer = document.getElementById('app');
 export let masterProjectList = []; 
 export const views = {}; 
-export let currentCategory = 'unity'; // Default category
+export let currentCategory = '_Unity_Project'; // Default category
 
 /**
  * Processes a project category by fetching its library and configuration files.
@@ -42,8 +42,8 @@ async function processProjectCategory(category) {
  */
 async function loadInitialData() {
     try {
-        const unityProjects = await processProjectCategory('unity');
-        const blenderProjects = await processProjectCategory('blender');
+        const unityProjects = await processProjectCategory('_Unity_Project');
+        const blenderProjects = await processProjectCategory('_Blender_Project');
         masterProjectList = [...unityProjects, ...blenderProjects];
 
         views.gallery = await fetchData('view/gallery-view.html', 'text');
@@ -65,10 +65,10 @@ async function loadInitialData() {
 function setupPortfolioSwitcher() {
     appContainer.addEventListener('click', (e) => {
         if (e.target.id === 'unity-portfolio-btn') {
-            currentCategory = 'unity';
+            currentCategory = '_Unity_Project';
             router();
         } else if (e.target.id === 'blender-portfolio-btn') {
-            currentCategory = 'blender';
+            currentCategory = '_Blender_Project';
             router();
         }
     });

@@ -1,0 +1,25 @@
+pages:
+  # The stage specifies when the job runs (in the deploy phase)
+  stage: deploy
+  
+  # The script defines the steps to prepare the files for Pages
+  script:
+    # 1. Create a temporary folder to work in
+    - mkdir .public
+    
+    # 2. Copy all website files/folders into the temporary folder, 
+    #    excluding the hidden .git directory (the Azmi Studio Portfolio folder you showed is likely .git)
+    #    This ensures all your HTML, CSS, JS, and image files are included.
+    - find . -path ./.git -prune -o -not -path './public' -exec cp -r "{}" .public/ \;
+    
+    # 3. Rename the temporary folder to 'public', which is the folder GitLab Pages looks for
+    - mv .public public
+    
+  # The artifacts section tells GitLab which folder contains the final output
+  artifacts:
+    paths:
+      - public
+      
+  # This rule ensures the deployment job only runs when you push to your main/default branch
+  rules:
+    - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH

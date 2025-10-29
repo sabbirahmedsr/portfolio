@@ -12,8 +12,8 @@ export let masterProjectList = [];
 export const views = {}; 
 
 // Determine base path for asset loading. Handles GitHub Pages deployment.
-const isGitHubPages = window.location.hostname.includes('github.io');
-const basePath = isGitHubPages ? '/portfolio/' : '/';
+// Use relative paths to ensure assets load correctly on both local server and GitHub Pages.
+const basePath = '';
 export let currentCategory = '_Unity_Project'; // Default category
 
 /**
@@ -23,9 +23,9 @@ export let currentCategory = '_Unity_Project'; // Default category
  */
 async function processProjectCategory(category) {
     try {
-        const projectPaths = await fetchData(`${basePath}${category}/project-library.json`);
+        const projectPaths = await fetchData(`${category}/project-library.json`);
         const fetchPromises = projectPaths.map(async (entry) => {
-            const finalFetchPath = `${basePath}${category}/` + entry.projectConfigPath;
+            const finalFetchPath = `${category}/` + entry.projectConfigPath;
             const config = await fetchData(finalFetchPath);
             return {
                 ...config, 
@@ -50,9 +50,9 @@ async function loadInitialData() {
         const blenderProjects = await processProjectCategory('_Blender_Project');
         masterProjectList = [...unityProjects, ...blenderProjects];
 
-        views.gallery = await fetchData(`${basePath}view/gallery-view.html`, 'text');
-        views.detail = await fetchData(`${basePath}view/detail-view.html`, 'text');
-        views.quickLook = await fetchData(`${basePath}view/quick-look.html`, 'text'); 
+        views.gallery = await fetchData('view/gallery-view.html', 'text');
+        views.detail = await fetchData('view/detail-view.html', 'text');
+        views.quickLook = await fetchData('view/quick-look.html', 'text'); 
         
         window.addEventListener('hashchange', router);
         router(); // Initial route

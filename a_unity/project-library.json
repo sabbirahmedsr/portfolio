@@ -1,5 +1,9 @@
 [
     {
+        "id": "baf-atc-simulator-bd",
+        "projectConfigPath": "BAF/ATC Simulator BD/config.json"
+    },
+    {
         "id": "hl-dolphin-app-mrtk3",
         "projectConfigPath": "HL Dolphin App MRTK3/config.json"
     },

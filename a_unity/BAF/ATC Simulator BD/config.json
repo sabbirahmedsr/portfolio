@@ -1,0 +1,52 @@
+{
+    "title": "BAF ATC Simulator BD",
+    "tagline": "Advanced Air Traffic Control Simulation for BAF",
+    "shortDescription": "A comprehensive training simulator for Bangladesh Air Force Air Traffic Controllers, featuring realistic scenarios, voice commands, and emergency procedure training.",
+    "previewImage": "./preview.webp",    
+
+    "client": "Bangladesh Air Force", 
+    "platforms": ["PC", "Desktop"],
+    
+    "InitiationDate": "01-01-2024",
+    "DevStartDate": "15-01-2024",
+    "DevEndDate": "30-06-2024",
+
+    "unityVersion": "2022.3.10f1",
+    "techStack": [
+        "Unity 2022.3.10f1", "C#", 
+        "Visual Studio 2022",
+        "Blender",
+        "Voice Recognition API",
+        "Riptide Network Solution"
+    ],
+    
+    
+    "media": [
+        {
+            "url": "./preview.webp", 
+            "alt": "Main screenshot of the ATC simulator interface."
+        } ,
+        {
+            "url": "./ss01.webp", 
+            "alt": "Main screenshot of the ATC simulator interface."
+        }
+    ],
+    
+    "externalLinks": [
+        {
+            "label": "Git-SIM",
+            "url": "https://github.com/sabbirahmedsr/BAF-ATC-Simulator-BIRP-U.2022.3.49f1",
+            "iconClass": "fab fa-github"
+        },
+        {
+            "label": "Git-OPR",
+            "url": "https://github.com/sabbirahmedsr/BAF-ATC-Operator-URP-U.6.1",
+            "iconClass": "fab fa-github"
+        },
+        {
+            "label": "Devlog",
+            "url": "https://sabbirahmedsr.github.io/atc-simulator-devlog",
+            "iconClass": "fas fa-globe"
+        }
+    ]
+}

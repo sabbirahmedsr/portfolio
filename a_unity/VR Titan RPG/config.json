@@ -1,0 +1,39 @@
+{
+    "title": "VR Titan RPG",
+    "tagline": "An epic VR adventure.",
+    "shortDescription": "A placeholder description for the VR Titan RPG project. Please update this with a real description.",
+    "previewImage": "./preview.webp",    
+
+    "client": "N/A", 
+    "platforms": ["VR"],
+    
+    "InitiationDate": "01-01-2024",
+    "DevStartDate": "01-01-2024",
+    "DevEndDate": "01-01-2024",
+
+    "unityVersion": "2022.3",
+    "techStack": [
+        "Unity", "C#", "VR"
+    ],
+    
+    
+    "media": [
+        {
+            "url": "./preview.webp", 
+            "alt": "Preview image for VR Titan RPG."
+        }
+    ],
+    
+    "externalLinks": [
+        {
+            "label": "GitHub",
+            "url": "https://github.com/sabbirahmedsr/vr-titan-rpg",
+            "iconClass": "fab fa-github"
+        },
+        {
+            "label": "GitLab",
+            "url": "https://gitlab.com/sabbirahmedsr/vr-titan-rpg",
+            "iconClass": "fab fa-gitlab"
+        }
+    ]
+}

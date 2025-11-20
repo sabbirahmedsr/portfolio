@@ -14,5 +14,9 @@
     {
         "id": "dummy-project",
         "projectConfigPath": "Dummy Project/config.json"
+    },
+    {
+        "id": "vr-titan-rpg",
+        "projectConfigPath": "VR Titan RPG/config.json"
     }
 ]

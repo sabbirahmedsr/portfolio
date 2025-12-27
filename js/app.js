@@ -6,6 +6,7 @@
 import { fetchData } from './utils.js';
 import { renderGalleryView } from './render-gallery.js';
 import { renderDetailView } from './render-detail.js';
+import { renderLandingPage } from './render-landing.js';
 
 export const appContainer = document.getElementById('app');
 export let masterProjectList = []; 
@@ -13,7 +14,8 @@ export const views = {};
 
 // Determine base path for asset loading. Handles GitHub Pages deployment.
 // Use relative paths to ensure assets load correctly on both local server and GitHub Pages.
-const basePath = '';
+const isInViewDir = window.location.pathname.includes('/view/');
+const rootPath = isInViewDir ? '../' : '';
 export let currentCategory = 'a_unity'; // Default category
 
 /**
@@ -23,14 +25,16 @@ export let currentCategory = 'a_unity'; // Default category
  */
 async function processProjectCategory(category) {
     try {
-        const projectPaths = await fetchData(`${category}/project-library.json`);
+        const projectPaths = await fetchData(`${rootPath}${category}/project-library.json`);
         const fetchPromises = projectPaths.map(async (entry) => {
-            const finalFetchPath = `${category}/` + entry.projectConfigPath;
+            const finalFetchPath = `${rootPath}${category}/` + entry.projectConfigPath;
             const config = await fetchData(finalFetchPath);
+            const projectBaseDir = finalFetchPath.substring(0, finalFetchPath.lastIndexOf('/'));
             return {
                 ...config, 
                 id: entry.id,
                 projectConfigPath: finalFetchPath,
+                baseDir: projectBaseDir,
                 category: category // Add category to each project
             };
         });
@@ -50,15 +54,17 @@ async function loadInitialData() {
         const blenderProjects = await processProjectCategory('b_blender');
         masterProjectList = [...unityProjects, ...blenderProjects];
 
-        views.gallery = await fetchData('view/gallery-view.html', 'text');
-        views.detail = await fetchData('view/detail-view.html', 'text');
-        views.quickLook = await fetchData('view/quick-look.html', 'text'); 
+        // Load Views
+        views.landing = await fetchData(`${rootPath}view/landing-view.html`, 'text');
+        views.gallery = await fetchData(`${rootPath}view/gallery-view.html`, 'text');
+        views.detail = await fetchData(`${rootPath}view/detail-view.html`, 'text');
+        views.quickLook = await fetchData(`${rootPath}view/quick-look.html`, 'text'); 
         
         window.addEventListener('hashchange', router);
         router(); // Initial route
-        setupPortfolioSwitcher();
+        setupPortfolioSwitcher(); // Setup delegation for switcher buttons
     } catch (error) {
-        appContainer.innerHTML = '<p class="error-message">Failed to load essential portfolio data. Please check the console.</p>';
+        if (appContainer) appContainer.innerHTML = '<p class="error-message">Failed to load essential portfolio data. Please check the console.</p>';
         console.error("Error loading initial data:", error);
     }
 }
@@ -88,9 +94,29 @@ function router() {
     if (path.startsWith('/project/')) {
         const projectId = path.split('/')[2];
         renderDetailView(projectId);
-    } else {
+    } else if (path === '/gallery') {
+        // Render Gallery View
+        appContainer.innerHTML = views.gallery;
         const projectsToShow = masterProjectList.filter(p => p.category === currentCategory);
         renderGalleryView(projectsToShow);
+        updateTabState();
+    } else {
+        // Render Landing View (Default)
+        appContainer.innerHTML = views.landing;
+        renderLandingPage(masterProjectList, rootPath, isInViewDir);
+    }
+}
+
+/**
+ * Updates the visual state of the portfolio switcher tabs.
+ */
+function updateTabState() {
+    const unityBtn = document.getElementById('unity-portfolio-btn');
+    const blenderBtn = document.getElementById('blender-portfolio-btn');
+    
+    if (unityBtn && blenderBtn) {
+        unityBtn.classList.toggle('active', currentCategory === 'a_unity');
+        blenderBtn.classList.toggle('active', currentCategory === 'b_blender');
     }
 }
 

@@ -1,0 +1,272 @@
+/* Landing Page Styles */
+:root {
+    --bg-dark: #050505; /* Deeper black for premium feel */
+    --bg-card: #111111;
+    --text-primary: #ffffff;
+    --text-secondary: #888888;
+    --accent-color: #3b82f6; /* More professional blue */
+    --accent-hover: #60a5fa;
+    --spacing-section: 8rem; /* More breathing room */
+}
+
+body {
+    background-color: var(--bg-dark);
+    color: var(--text-primary);
+    font-family: 'Inter', 'Segoe UI', Roboto, sans-serif;
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+}
+
+/* Hero Section */
+.hero {
+    min-height: 80vh; /* Full screen impact */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    background: radial-gradient(circle at center, #1a1f2e 0%, var(--bg-dark) 70%);
+    padding: 2rem;
+    position: relative;
+}
+
+.hero h1 {
+    font-size: 4rem;
+    font-weight: 800;
+    margin-bottom: 1.5rem;
+    letter-spacing: -0.02em;
+    background: linear-gradient(180deg, #fff 0%, #a5b4fc 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    max-width: 900px;
+    line-height: 1.1;
+}
+
+.hero p {
+    font-size: 1.5rem;
+    color: var(--text-secondary);
+    max-width: 700px;
+    margin: 0 auto 3rem auto;
+    font-weight: 300;
+}
+
+.cta-button {
+    display: inline-block;
+    padding: 1rem 2.5rem;
+    background-color: transparent;
+    color: var(--text-primary);
+    border: 1px solid rgba(255,255,255,0.2);
+    text-decoration: none;
+    font-weight: 500;
+    border-radius: 50px;
+    transition: all 0.3s ease;
+    font-size: 1.1rem;
+}
+
+.cta-button:hover {
+    background-color: var(--text-primary);
+    color: var(--bg-dark);
+    transform: translateY(-2px);
+    border-color: var(--text-primary);
+}
+
+/* Sections */
+.category-section {
+    padding: var(--spacing-section) 2rem;
+    max-width: 1400px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 3rem;
+    position: relative;
+}
+
+.section-header {
+    margin-bottom: 2rem;
+}
+
+/* Desktop Sticky Zigzag Layout */
+@media (min-width: 992px) {
+    .category-section {
+        flex-direction: row;
+        align-items: flex-start; /* Important for sticky */
+        justify-content: space-between;
+        gap: 6rem;
+    }
+
+    /* Zigzag: Alternate direction */
+    .category-section:nth-of-type(even) {
+        flex-direction: row-reverse;
+    }
+
+    .section-header {
+        flex: 0 0 30%;
+        position: sticky;
+        top: 150px; /* Stick to top while scrolling projects */
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        text-align: left;
+    }
+
+    .category-section:nth-of-type(even) .section-header {
+        align-items: flex-end;
+        text-align: right;
+    }
+
+    .projects-grid {
+        flex: 1;
+    }
+}
+
+.section-header h2 {
+    font-size: 3rem;
+    margin: 0 0 1.5rem 0;
+    color: var(--text-primary);
+    line-height: 1;
+    font-weight: 700;
+}
+
+.section-header .view-all {
+    color: var(--text-primary);
+    text-decoration: none;
+    font-size: 0.9rem;
+    font-weight: 500;
+    border-bottom: 1px solid var(--text-secondary);
+    padding-bottom: 0.2rem;
+    transition: all 0.3s ease;
+    opacity: 0.7;
+}
+
+.section-header .view-all:hover {
+    opacity: 1;
+    border-color: var(--text-primary);
+}
+
+/* Grid Layout */
+.projects-grid {
+    display: grid;
+    grid-template-columns: 1fr; /* Stack vertically on mobile */
+    gap: 4rem; /* Large gap between projects */
+}
+
+@media (min-width: 768px) {
+    .projects-grid {
+        /* On tablet/desktop, use a grid or keep vertical stack for "feed" look? 
+           Let's use a grid of 2 for the content side to save vertical space */
+        grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+        gap: 2rem;
+    }
+}
+
+/* Placeholder for JS injection */
+.projects-grid:empty::before {
+    content: "Loading projects...";
+    color: var(--text-secondary);
+}
+
+/* 
+   MINIMALIST LANDING CARD 
+   - No border
+   - No background
+   - Focus on Image + Title + Action
+*/
+.landing-card {
+    background-color: transparent;
+    border-radius: 0;
+    overflow: visible;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border: none;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+}
+
+.landing-card:hover {
+    transform: translateY(-10px);
+    box-shadow: none;
+    border-color: transparent;
+}
+
+.landing-card-image {
+    width: 100%;
+    aspect-ratio: 16/9;
+    overflow: hidden;
+    border-radius: 8px;
+    margin-bottom: 1.5rem;
+    background-color: #111;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+}
+
+.landing-card:hover .landing-card-image {
+    box-shadow: 0 20px 40px rgba(0,0,0,0.5);
+}
+
+.landing-card-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+    opacity: 0.9;
+}
+
+.landing-card:hover .landing-card-image img {
+    transform: scale(1.05);
+    opacity: 1;
+}
+
+.landing-card-content {
+    padding: 0;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.landing-card h3 {
+    margin: 0 0 0.25rem 0;
+    font-size: 1.4rem;
+    color: #fff;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+}
+
+/* Hide description for minimal look, or keep tagline very subtle */
+.landing-card p {
+    display: none; /* User requested minimum info */
+}
+
+.landing-card-btn {
+    align-self: flex-start;
+    color: var(--text-primary);
+    font-weight: 600;
+    text-decoration: none;
+    font-size: 0.9rem;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    transition: gap 0.2s, color 0.2s;
+    margin-top: 0.5rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-size: 0.75rem;
+    opacity: 0.7;
+}
+
+.landing-card-btn:hover {
+    gap: 0.8rem;
+    opacity: 1;
+    color: var(--accent-color);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .hero h1 {
+        font-size: 3rem;
+    }
+    .category-section {
+        padding: 4rem 1.5rem;
+        gap: 2rem;
+    }
+}

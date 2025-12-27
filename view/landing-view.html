@@ -1,0 +1,90 @@
+<!-- 
+    LANDING PAGE CONFIGURATION
+    Modify the JSON data below to update the landing page sections.
+-->
+<script type="application/json" id="landing-config-data">
+[
+    {
+        "id": "featured",
+        "title": "Featured Projects",
+        "description": "A curated selection of high-impact Unity and Blender projects.",
+        "linkUrl": "#/gallery",
+        "projects": [
+            "a_unity/++Hololens Project++/HL Dolphin App MRTK3/config.json",
+            "a_unity/++BAF++/ATC Simulator BD/config.json",
+            "a_unity/++VR Project++/VR Q2 Firefighter/config.json",
+            "a_unity/++VR Project++/VR Titan RPG/config.json"
+        ]
+    },
+    {
+        "id": "hololens",
+        "title": "HoloLens & Mixed Reality",
+        "description": "Blending the digital and physical worlds with Microsoft HoloLens.",
+        "linkUrl": "#/gallery",
+        "projects": [
+            "a_unity/++Hololens Project++/HL Dolphin App MRTK3/config.json",
+            "a_unity/Dummy Project/config.json"
+        ]
+    },
+    {
+        "id": "vr",
+        "title": "Virtual Reality (VR)",
+        "description": "Immersive environments for gaming, training, and exploration.",
+        "linkUrl": "#/gallery",
+        "projects": [
+            "a_unity/++VR Project++/VR Q2 Firefighter/config.json",
+            "a_unity/++VR Project++/VR Titan RPG/config.json"
+        ]
+    },
+    {
+        "id": "simulation",
+        "title": "Simulations & Serious Games",
+        "description": "High-fidelity training solutions for professional industries.",
+        "linkUrl": "#/gallery",
+        "projects": [
+            "a_unity/++BAF++/ATC Simulator BD/config.json",
+            "a_unity/++VR Project++/VR Q2 Firefighter/config.json"
+        ]
+    },
+    {
+        "id": "multiplayer",
+        "title": "Multiplayer & Networking",
+        "description": "Connecting users through synchronized real-time experiences.",
+        "linkUrl": "#/gallery",
+        "projects": [
+            "a_unity/++BAF++/ATC Simulator BD/config.json"
+        ]
+    }
+]
+</script>
+
+<!-- Header -->
+<header class="main-header" style="padding: var(--spacing-xs) 2rem; background: #0f1115; margin-bottom: 0; border-bottom: 1px solid #333; border-radius: 0;">
+    <div class="header-branding">
+        <a href="https://azmistudio.com" target="_blank" rel="noopener noreferrer" class="logo-button">
+            <img src="image/azmi-studio-logo.png" alt="Azmi Studio Logo">
+        </a>
+        <h1 class="header-title">Azmi Studio Portfolio</h1>
+    </div>
+    
+    <div style="display: flex; align-items: center; gap: 20px; color: var(--color-text-muted); font-size: 1.1rem;">
+        <a href="#/gallery" style="color: inherit; text-decoration: none; font-weight: 500; transition: color 0.2s; display: flex; align-items: center; gap: 6px;">
+            <i class="fas fa-th" style="font-size: 1.4rem;"></i> Gallery
+        </a>
+        <a href="https://www.facebook.com/SabbirAhmedSR" target="_blank" style="color: inherit; text-decoration: none; transition: color 0.2s;" title="Facebook">
+            <i class="fab fa-facebook-square" style="font-size: 1.5rem;"></i>
+        </a>
+    </div>
+</header>
+
+<!-- Hero Section -->
+<header class="hero">
+    <h1>Unity Developer & 3D Artist</h1>
+    <p>Delivering high-fidelity VR/AR solutions, advanced simulations, and professional 3D visualization.</p>
+    <a href="#/gallery" class="cta-button">View Full Portfolio</a>
+</header>
+
+<main class="app-container">
+    <!-- Dynamic Landing Sections -->
+    <div id="landing-sections"></div>
+</main>

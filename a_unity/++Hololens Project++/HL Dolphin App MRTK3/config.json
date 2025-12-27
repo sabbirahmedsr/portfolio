@@ -11,7 +11,7 @@
     "DevStartDate": "01-10-2025",
     "DevEndDate": "30-11-2025",
 
-    "unityVersion": "2021.3.8f1",
+    "unityVersion": "6000.2.8f1",
     "techStack": [
         "Unity 6000.2.8f1", "C#", 
         "Visual Studio 2022",

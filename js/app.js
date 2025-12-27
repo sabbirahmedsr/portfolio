@@ -96,10 +96,8 @@ function router() {
         renderDetailView(projectId);
     } else if (path === '/gallery') {
         // Render Gallery View
-        appContainer.innerHTML = views.gallery;
-        const projectsToShow = masterProjectList.filter(p => p.category === currentCategory);
-        renderGalleryView(projectsToShow);
-        updateTabState();
+        const initialList = masterProjectList.filter(p => p.category === currentCategory);
+        renderGalleryView(initialList);
     } else {
         // Render Landing View (Default)
         appContainer.innerHTML = views.landing;

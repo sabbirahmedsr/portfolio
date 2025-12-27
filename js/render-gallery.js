@@ -34,12 +34,15 @@ function getPlatformIcon(platform) {
  * Renders the Gallery View.
  */
 export function renderGalleryView(filteredList = masterProjectList, filterState = { year: 'all', platform: 'all' }) {
-    appContainer.innerHTML = views.gallery;
-    
-    if (!document.getElementById('quick-look-modal')) {
-        initQuickLookModal();
+    // Only inject the gallery structure if it doesn't exist
+    if (!document.getElementById('gallery-view')) {
+        appContainer.innerHTML = views.gallery;
+        if (!document.getElementById('quick-look-modal')) {
+            initQuickLookModal();
+        }
     }
 
+    // Always update filters (safe to call repeatedly with the fix below)
     populateFilters(filterState);
 
     const gridContainer = document.getElementById('project-grid');
@@ -135,6 +138,10 @@ function populateFilters(filterState = { year: 'all', platform: 'all' }) {
     .sort((a, b) => b - a);
     const platforms = [...new Set(projectsForCurrentCategory.flatMap(p => p.platforms))].sort();
 
+    // Clear existing options (keep the first 'All' option)
+    while (yearFilter.options.length > 1) yearFilter.remove(1);
+    while (platformFilter.options.length > 1) platformFilter.remove(1);
+
     years.forEach(year => {
         const option = new Option(year, year, false, year == filterState.year);
         yearFilter.add(option);
@@ -151,7 +158,7 @@ function populateFilters(filterState = { year: 'all', platform: 'all' }) {
     const applyFilters = () => {
         const selectedYear = yearFilter.value;
         const selectedPlatform = platformFilter.value;
-        const searchTerm = searchInput.value.toLowerCase();
+        const searchTerm = searchInput.value.toLowerCase().trim();
 
         const filterState = { year: selectedYear, platform: selectedPlatform };
 
@@ -179,6 +186,8 @@ function populateFilters(filterState = { year: 'all', platform: 'all' }) {
         renderGalleryView(filteredList, filterState);
     };
 
-    [yearFilter, platformFilter].forEach(el => el.addEventListener('change', applyFilters));
-    searchInput.addEventListener('keyup', applyFilters);
+    // Use 'onchange'/'oninput' to prevent duplicate listeners if this function is called multiple times
+    yearFilter.onchange = applyFilters;
+    platformFilter.onchange = applyFilters;
+    searchInput.oninput = applyFilters;
 }

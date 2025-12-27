@@ -1,5 +1,6 @@
 {
     "title": "BAF ATC Simulator BD",
+    "slug": "baf-atc-simulator-bd",
     "tagline": "Advanced Air Traffic Control Simulation for BAF",
     "shortDescription": "A comprehensive training simulator for Bangladesh Air Force Air Traffic Controllers, featuring realistic scenarios, voice commands, and emergency procedure training.",
     "previewImage": "./preview.webp",    
@@ -28,7 +29,7 @@
         } ,
         {
             "url": "./ss01.webp", 
-            "alt": "Main screenshot of the ATC simulator interface."
+            "alt": "Secondary view showing the radar scope and communication panel."
         }
     ],
     

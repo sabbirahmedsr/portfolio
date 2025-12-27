@@ -1,0 +1,53 @@
+{
+    "title": "HL Machine WEIMA WLK",
+    "slug": "hl-machine-weima-wlk",
+    "tagline": "Mixed Reality Visualization of WEIMA WLK",
+    "shortDescription": "A Mixed Reality application for the HoloLens visualizing the WEIMA WLK shredder machine. This project allows users to inspect internal components and operational flows in 3D space.",
+    "previewImage": "./preview02.png",
+
+    "client": "Personal Project",
+    "platforms": ["HoloLens", "MR"],
+    
+    "InitiationDate": "01-01-2025",
+    "DevStartDate": "01-01-2025",
+    "DevEndDate": "01-02-2025",
+
+    "unityVersion": "2022.3",
+    "techStack": [
+        "Unity",
+        "C#",
+        "MRTK3",
+        "HoloLens 2"
+    ],
+    
+    "media": [
+        {
+            "url": "./preview01.png",
+            "alt": "Preview of the WEIMA WLK machine in Mixed Reality."
+        },
+        {
+            "url": "./preview02.png",
+            "alt": "Detailed view of the shredder mechanism."
+        },
+        {
+            "url": "./preview03.png",
+            "alt": "Screenshot from feedback video."
+        },
+        {
+            "url": "./preview04.png",
+            "alt": "Screenshot from feedback video."
+        },
+        {
+            "url": "./preview05.png",
+            "alt": "Screenshot from feedback video."
+        }
+    ],
+    
+    "externalLinks": [
+        {
+            "label": "GitHub",
+            "url": "https://github.com/your-username/hl-machine-weima-wlk",
+            "iconClass": "fab fa-github"
+        }
+    ]
+}

@@ -1,7 +1,8 @@
 {
     "title": "VR Titan RPG",
+    "slug": "vr-titan-rpg",
     "tagline": "An epic VR adventure.",
-    "shortDescription": "A placeholder description for the VR Titan RPG project. Please update this with a real description.",
+    "shortDescription": "An immersive RPG experience designed for VR, featuring large-scale titan encounters and interactive combat systems.",
     "previewImage": "./preview.webp",    
 
     "client": "N/A", 

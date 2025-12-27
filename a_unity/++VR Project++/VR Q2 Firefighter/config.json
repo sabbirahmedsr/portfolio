@@ -1,5 +1,6 @@
 {
     "title": "VR Q2 Firefighter Simulator",
+    "slug": "vr-q2-firefighter",
     "tagline": "VR Training for Real Heroes",
     "shortDescription": "A VR training simulation for firefighters, built for the Meta Quest 2. This project provides a realistic environment to practice emergency procedures and equipment handling.",
     "previewImage": "./preview.png",    

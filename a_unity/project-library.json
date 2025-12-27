@@ -18,5 +18,9 @@
     {
         "id": "vr-titan-rpg",
         "projectConfigPath": "++VR Project++/VR Titan RPG/config.json"
+    },
+    {
+        "id": "hl-machine-weima-wlk",
+        "projectConfigPath": "++Hololens Project++/HL Machine WEIMA WLK/config.json"
     }
 ]

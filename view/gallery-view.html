@@ -1,4 +1,62 @@
 <section id="gallery-view" class="app-container">
+    <style>
+        /* Enforce 3-column grid for desktop */
+        .project-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 2rem;
+            padding: 2rem clamp(2rem, 15vw, 18rem);
+        }
+        @media (min-width: 1100px) {
+            .project-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+
+        /* Pagination Styles */
+        .pagination-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 0.8rem;
+            padding: 2rem 0;
+            margin-top: 1rem;
+            border-top: 1px solid #1a1d24;
+        }
+        .pagination-btn {
+            background: #1a1d24;
+            color: #ccc;
+            border: 1px solid #333;
+            padding: 0.6rem 1.2rem;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.9rem;
+        }
+        .pagination-btn:hover:not(:disabled) {
+            background: #252830;
+            color: #fff;
+            border-color: #4db8ff;
+        }
+        .pagination-btn:disabled {
+            opacity: 0.4;
+            cursor: not-allowed;
+            border-color: #222;
+            background: #0e1014;
+        }
+        .pagination-info {
+            color: #666;
+            font-size: 0.9rem;
+            font-weight: 500;
+            min-width: 100px;
+            text-align: center;
+            user-select: none;
+        }
+    </style>
+
     <header class="main-header" style="background: #0b0d11; border-bottom: 1px solid #1a1d24; padding: 1.2rem 2rem; display: flex; align-items: center; justify-content: space-between; gap: 2rem;">
         <div class="header-branding" style="display: flex; align-items: center; gap: 1.5rem;">
             <div style="display: flex; align-items: center; gap: 12px;">
@@ -48,5 +106,14 @@
 
     <div id="project-grid" class="project-grid">
         <!-- Projects will be injected here -->
+    </div>
+
+    <!-- Pagination Controls -->
+    <div class="pagination-container">
+        <button id="btn-first" class="pagination-btn" title="First Page"><i class="fas fa-angle-double-left"></i></button>
+        <button id="btn-prev" class="pagination-btn" title="Previous Page"><i class="fas fa-angle-left"></i> Prev</button>
+        <span id="pagination-info" class="pagination-info">Page 1 of 1</span>
+        <button id="btn-next" class="pagination-btn" title="Next Page">Next <i class="fas fa-angle-right"></i></button>
+        <button id="btn-last" class="pagination-btn" title="Last Page"><i class="fas fa-angle-double-right"></i></button>
     </div>
 </section>

@@ -30,13 +30,22 @@ function getPlatformIcon(platform) {
     return 'fas fa-desktop';
 }
 
+// Pagination State
+let currentPage = 1;
+const itemsPerPage = 9; // 3 columns * 3 rows
+let currentFullList = []; // Holds the currently filtered and sorted list
+let currentFilterState = {}; // Holds current filter state
+
 /**
  * Renders the Gallery View.
  */
-export function renderGalleryView(filteredList = masterProjectList, filterState = { year: 'all', platform: 'all', sort: 'date-desc' }) {
+export function renderGalleryView(filteredList = masterProjectList, filterState = { year: 'all', platform: 'all', sort: 'date-desc' }, resetPage = false) {
     // Only inject the gallery structure if it doesn't exist
     if (!document.getElementById('gallery-view')) {
         appContainer.innerHTML = views.gallery;
+        // Setup pagination listeners when view is first injected
+        setupPaginationListeners();
+        
         if (!document.getElementById('quick-look-modal')) {
             initQuickLookModal();
         }
@@ -44,6 +53,10 @@ export function renderGalleryView(filteredList = masterProjectList, filterState 
 
     // Always update filters (safe to call repeatedly with the fix below)
     populateFilters(filterState);
+
+    // Update module-level state
+    currentFilterState = filterState;
+    if (resetPage) currentPage = 1;
 
     const gridContainer = document.getElementById('project-grid');
     if (!gridContainer) return;
@@ -58,8 +71,18 @@ export function renderGalleryView(filteredList = masterProjectList, filterState 
         if (sort === 'name-desc') return b.title.localeCompare(a.title);
         return 0;
     });
+    currentFullList = projectsToRender;
 
-    const cardHTML = projectsToRender.map(project => {
+    // Pagination Logic: Slice the list
+    const totalPages = Math.ceil(currentFullList.length / itemsPerPage) || 1;
+    if (currentPage > totalPages) currentPage = totalPages;
+    if (currentPage < 1) currentPage = 1;
+
+    const startIndex = (currentPage - 1) * itemsPerPage;
+    const endIndex = startIndex + itemsPerPage;
+    const pagedProjects = currentFullList.slice(startIndex, endIndex);
+
+    const cardHTML = pagedProjects.map(project => {
         const projectBasePath = project.projectConfigPath.replace('config.json', '');
         const previewImageUrl = project.previewImage.startsWith('./')
             ? projectBasePath + project.previewImage.replace('./', '')
@@ -104,6 +127,9 @@ export function renderGalleryView(filteredList = masterProjectList, filterState 
 
     gridContainer.innerHTML = cardHTML;
     
+    // Update Pagination UI
+    updatePaginationUI(totalPages);
+
     document.querySelectorAll('.quick-look-btn').forEach(btn => {
         btn.addEventListener('click', (e) => {
             e.preventDefault(); // Prevent the parent link from navigating
@@ -129,6 +155,55 @@ export function renderGalleryView(filteredList = masterProjectList, filterState 
     } else {
         platformFilterGroup.style.display = 'flex';
     }
+}
+
+/**
+ * Updates the pagination buttons and info text.
+ */
+function updatePaginationUI(totalPages) {
+    const infoEl = document.getElementById('pagination-info');
+    const btnFirst = document.getElementById('btn-first');
+    const btnPrev = document.getElementById('btn-prev');
+    const btnNext = document.getElementById('btn-next');
+    const btnLast = document.getElementById('btn-last');
+
+    if (infoEl) infoEl.textContent = `Page ${currentPage} of ${totalPages}`;
+    
+    if (btnFirst) btnFirst.disabled = currentPage === 1;
+    if (btnPrev) btnPrev.disabled = currentPage === 1;
+    
+    if (btnNext) btnNext.disabled = currentPage === totalPages;
+    if (btnLast) btnLast.disabled = currentPage === totalPages;
+}
+
+/**
+ * Sets up event listeners for pagination buttons.
+ */
+function setupPaginationListeners() {
+    const btnFirst = document.getElementById('btn-first');
+    const btnPrev = document.getElementById('btn-prev');
+    const btnNext = document.getElementById('btn-next');
+    const btnLast = document.getElementById('btn-last');
+
+    if (!btnFirst) return;
+
+    const handlePageChange = (newPage) => {
+        if (newPage !== currentPage) {
+            currentPage = newPage;
+            renderGalleryView(currentFullList, currentFilterState, false);
+            // Smooth scroll to top of gallery
+            const header = document.querySelector('.main-header');
+            if (header) header.scrollIntoView({ behavior: 'smooth' });
+        }
+    };
+
+    // Calculate total pages dynamically based on current list
+    const getTotalPages = () => Math.ceil(currentFullList.length / itemsPerPage) || 1;
+
+    btnFirst.addEventListener('click', () => handlePageChange(1));
+    btnPrev.addEventListener('click', () => handlePageChange(currentPage - 1));
+    btnNext.addEventListener('click', () => handlePageChange(currentPage + 1));
+    btnLast.addEventListener('click', () => handlePageChange(getTotalPages()));
 }
 
 /**
@@ -197,7 +272,7 @@ function populateFilters(filterState = { year: 'all', platform: 'all', sort: 'da
             );
         }
 
-        renderGalleryView(filteredList, filterState);
+        renderGalleryView(filteredList, filterState, true); // Reset to page 1 on filter change
     };
 
     // Use 'onchange'/'oninput' to prevent duplicate listeners if this function is called multiple times

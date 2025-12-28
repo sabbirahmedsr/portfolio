@@ -92,8 +92,10 @@ function setupPortfolioSwitcher() {
  */
 function router() {
     const path = window.location.hash.slice(1) || '/';
-    window.scrollTo(0, 0); // Reset window scroll
-    appContainer.scrollTop = 0; 
+    if (path !== 'contact') {
+        window.scrollTo(0, 0); // Reset window scroll
+        appContainer.scrollTop = 0; 
+    }
 
     // Clear any active slider interval when navigating
     if (sliderIntervalId) {
@@ -122,6 +124,13 @@ function router() {
         appContainer.innerHTML = views.landing;
         renderLandingPage(masterProjectList, rootPath, isInViewDir);
         initFeaturedSlider();
+
+        if (path === 'contact') {
+            setTimeout(() => {
+                const contactSection = document.getElementById('contact');
+                if (contactSection) contactSection.scrollIntoView({ behavior: 'smooth' });
+            }, 100);
+        }
     }
 }
 
@@ -176,10 +185,10 @@ function initFeaturedSlider() {
             <div class="slide-bg" style="background-image: url('${imageUrl}');"></div>
             <div class="slide-inner">
                 <div class="slide-text">
-                    <span style="background: #4db8ff; color: #000; padding: 4px 8px; font-size: 0.8rem; font-weight: 700; border-radius: 2px; text-transform: uppercase;">Featured</span>
-                    <h2 style="font-size: 3rem; color: #fff; margin: 0.8rem 0; line-height: 1.1; text-shadow: 0 2px 10px rgba(0,0,0,0.5);">${p.title}</h2>
-                    <p style="font-size: 1.1rem; color: #ccc; max-width: 600px;">${p.tagline || p.shortDescription}</p>
-                    <a href="${detailLink}" style="display: inline-block; margin-top: 1.5rem; background: transparent; border: 1px solid rgba(255,255,255,0.3); color: #fff; padding: 0.7rem 1.5rem; border-radius: 4px; text-decoration: none; font-size: 0.9rem; transition: all 0.2s;" onmouseover="this.style.borderColor='#fff'; this.style.background='rgba(255,255,255,0.1)'" onmouseout="this.style.borderColor='rgba(255,255,255,0.3)'; this.style.background='transparent'">View Details</a>
+                    <span class="slide-badge">Featured</span>
+                    <h2 class="slide-title">${p.title}</h2>
+                    <p class="slide-description">${p.tagline || p.shortDescription}</p>
+                    <a href="${detailLink}" class="slide-cta">View Details</a>
                 </div>
                 <div class="slide-visual">
                     <img src="${imageUrl}" alt="${p.title}">

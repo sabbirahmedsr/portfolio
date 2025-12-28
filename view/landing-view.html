@@ -58,10 +58,117 @@
 ]
 </script>
 
+<style>
+    /* Responsive Navigation */
+    .landing-nav {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 1.2rem 2rem;
+        background: #0b0d11;
+        border-bottom: 1px solid #1a1d24;
+        position: relative;
+        z-index: 10;
+    }
+    .nav-branding {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+    }
+    .nav-actions {
+        display: flex;
+        gap: 1rem;
+    }
+
+    /* Slider Typography & Layout */
+    .slide-badge {
+        background: #4db8ff;
+        color: #000;
+        padding: 4px 8px;
+        font-size: 0.8rem;
+        font-weight: 700;
+        border-radius: 2px;
+        text-transform: uppercase;
+        display: inline-block;
+    }
+    .slide-title {
+        font-size: 3rem;
+        color: #fff;
+        margin: 0.8rem 0;
+        line-height: 1.1;
+        text-shadow: 0 2px 10px rgba(0,0,0,0.5);
+    }
+    .slide-description {
+        font-size: 1.1rem;
+        color: #ccc;
+        max-width: 600px;
+    }
+    .slide-cta {
+        display: inline-block;
+        margin-top: 1.5rem;
+        background: transparent;
+        border: 1px solid rgba(255,255,255,0.3);
+        color: #fff;
+        padding: 0.7rem 1.5rem;
+        border-radius: 4px;
+        text-decoration: none;
+        font-size: 0.9rem;
+        transition: all 0.2s;
+    }
+    .slide-cta:hover {
+        border-color: #fff;
+        background: rgba(255,255,255,0.1);
+    }
+
+    /* Landing Grid Responsiveness */
+    .projects-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+        gap: 1.5rem;
+        padding: 1rem 0;
+    }
+
+    /* Mobile Adjustments */
+    @media (max-width: 768px) {
+        .landing-nav {
+            flex-direction: column;
+            gap: 1rem;
+            padding: 1rem;
+        }
+        .nav-actions {
+            width: 100%;
+            justify-content: center;
+        }
+        
+        .slide-title { font-size: 2rem; }
+        .slide-description { font-size: 1rem; }
+        
+        /* Adjust slider inner layout for mobile */
+        .slide-inner {
+            flex-direction: column-reverse;
+            text-align: center;
+            padding: 2rem !important;
+        }
+        .slide-text { align-items: center; }
+        .slide-visual { display: none; } /* Hide 3D visual on small mobile to save space */
+    }
+
+    /* Section Spacing */
+    .category-section {
+        margin-bottom: 10rem;
+        padding: 1rem 2rem;
+    }
+
+    /* Add spacing between slider and first section */
+    #landing-sections {
+        padding-top: 6rem;
+    }
+</style>
+
 <!-- Top Navigation Header -->
-<nav style="display: flex; justify-content: space-between; align-items: center; padding: 1.2rem 2rem; background: #0b0d11; border-bottom: 1px solid #1a1d24; position: relative; z-index: 10;">
+<nav class="landing-nav">
     <!-- Left: Branding -->
-    <div style="display: flex; align-items: center; gap: 12px;">
+    <div class="nav-branding">
         <a href="https://azmistudio.com" target="_blank" style="text-decoration: none; display: flex; align-items: center; justify-content: center; width: 48px; height: 48px; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); border-radius: 12px; transition: all 0.2s;" onmouseover="this.style.background='rgba(255,255,255,0.1)'; this.style.borderColor='rgba(255,255,255,0.2)'" onmouseout="this.style.background='rgba(255,255,255,0.05)'; this.style.borderColor='rgba(255,255,255,0.1)'">
             <img src="image/azmi-studio-logo.png" alt="Logo" style="height: 28px; width: auto;">
         </a>
@@ -73,9 +180,9 @@
     </div>
 
     <!-- Right: Actions -->
-    <div style="display: flex; gap: 1rem;">
+    <div class="nav-actions">
         <a href="#/gallery" class="cta-button" style="background: transparent; color: #fff; padding: 0.6rem 1.5rem; border-radius: 4px; text-decoration: none; font-weight: 500; font-size: 0.9rem; border: 1px solid #333; transition: all 0.2s;">Explore Gallery</a>
-        <a href="#contact" class="cta-button" style="background: transparent; color: #fff; padding: 0.6rem 1.5rem; border-radius: 4px; text-decoration: none; font-weight: 500; font-size: 0.9rem; border: 1px solid #333; transition: all 0.2s;">Contact Us</a>
+        <a href="#contact" class="cta-button" style="background: transparent; color: #fff; padding: 0.6rem 1.5rem; border-radius: 4px; text-decoration: none; font-weight: 500; font-size: 0.9rem; border: 1px solid #333; transition: all 0.2s;" onclick="event.preventDefault(); document.getElementById('contact').scrollIntoView({behavior: 'smooth'});">Contact Us</a>
     </div>
 </nav>
 

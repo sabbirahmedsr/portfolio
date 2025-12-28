@@ -55,9 +55,11 @@ async function loadInitialData() {
         masterProjectList = [...unityProjects, ...blenderProjects];
 
         // Load Views
-        views.landing = await fetchData(`${rootPath}view/landing-view.html`, 'text');
-        views.gallery = await fetchData(`${rootPath}view/gallery-view.html`, 'text');
-        views.detail = await fetchData(`${rootPath}view/detail-view.html`, 'text');
+        const footerHTML = await fetchData(`${rootPath}view/footer-view.html`, 'text');
+
+        views.landing = (await fetchData(`${rootPath}view/landing-view.html`, 'text')) + footerHTML;
+        views.gallery = (await fetchData(`${rootPath}view/gallery-view.html`, 'text')) + footerHTML;
+        views.detail = (await fetchData(`${rootPath}view/detail-view.html`, 'text')) + footerHTML;
         views.quickLook = await fetchData(`${rootPath}view/quick-look.html`, 'text'); 
         
         window.addEventListener('hashchange', router);
@@ -89,11 +91,21 @@ function setupPortfolioSwitcher() {
  */
 function router() {
     const path = window.location.hash.slice(1) || '/';
+    window.scrollTo(0, 0); // Reset window scroll
     appContainer.scrollTop = 0; 
 
     if (path.startsWith('/project/')) {
         const projectId = path.split('/')[2];
-        renderDetailView(projectId);
+        
+        // Wait for the view to render before scrolling
+        renderDetailView(projectId).then(() => {
+            setTimeout(() => {
+                const nav = appContainer.querySelector('nav');
+                if (nav) {
+                    window.scrollTo({ top: nav.offsetHeight, behavior: 'smooth' });
+                }
+            }, 100);
+        });
     } else if (path === '/gallery') {
         // Render Gallery View
         const initialList = masterProjectList.filter(p => p.category === currentCategory);

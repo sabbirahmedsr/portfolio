@@ -33,7 +33,7 @@ function getPlatformIcon(platform) {
 /**
  * Renders the Gallery View.
  */
-export function renderGalleryView(filteredList = masterProjectList, filterState = { year: 'all', platform: 'all' }) {
+export function renderGalleryView(filteredList = masterProjectList, filterState = { year: 'all', platform: 'all', sort: 'date-desc' }) {
     // Only inject the gallery structure if it doesn't exist
     if (!document.getElementById('gallery-view')) {
         appContainer.innerHTML = views.gallery;
@@ -48,7 +48,18 @@ export function renderGalleryView(filteredList = masterProjectList, filterState 
     const gridContainer = document.getElementById('project-grid');
     if (!gridContainer) return;
 
-    const cardHTML = filteredList.map(project => {
+    // Sort the list before rendering
+    const projectsToRender = [...filteredList];
+    projectsToRender.sort((a, b) => {
+        const sort = filterState.sort;
+        if (sort === 'date-desc') return (parseDate(b.DevEndDate) || 0) - (parseDate(a.DevEndDate) || 0);
+        if (sort === 'date-asc') return (parseDate(a.DevEndDate) || 0) - (parseDate(b.DevEndDate) || 0);
+        if (sort === 'name-asc') return a.title.localeCompare(b.title);
+        if (sort === 'name-desc') return b.title.localeCompare(a.title);
+        return 0;
+    });
+
+    const cardHTML = projectsToRender.map(project => {
         const projectBasePath = project.projectConfigPath.replace('config.json', '');
         const previewImageUrl = project.previewImage.startsWith('./')
             ? projectBasePath + project.previewImage.replace('./', '')
@@ -123,9 +134,10 @@ export function renderGalleryView(filteredList = masterProjectList, filterState 
 /**
  * Populates filter dropdowns and attaches event listeners.
  */
-function populateFilters(filterState = { year: 'all', platform: 'all' }) {
+function populateFilters(filterState = { year: 'all', platform: 'all', sort: 'date-desc' }) {
     const yearFilter = document.getElementById('filter-year');
     const platformFilter = document.getElementById('filter-platform');
+    const sortFilter = document.getElementById('filter-sort');
     const searchInput = document.getElementById('search-input');
 
     // Get projects for the current category to populate filters accurately
@@ -154,13 +166,15 @@ function populateFilters(filterState = { year: 'all', platform: 'all' }) {
 
     yearFilter.value = filterState.year;
     platformFilter.value = filterState.platform;
+    if (sortFilter) sortFilter.value = filterState.sort;
 
     const applyFilters = () => {
         const selectedYear = yearFilter.value;
         const selectedPlatform = platformFilter.value;
+        const selectedSort = sortFilter ? sortFilter.value : 'date-desc';
         const searchTerm = searchInput.value.toLowerCase().trim();
 
-        const filterState = { year: selectedYear, platform: selectedPlatform };
+        const filterState = { year: selectedYear, platform: selectedPlatform, sort: selectedSort };
 
         // Start with projects from the current category, not the master list
         let filteredList = masterProjectList.filter(p => p.category === currentCategory);
@@ -189,5 +203,6 @@ function populateFilters(filterState = { year: 'all', platform: 'all' }) {
     // Use 'onchange'/'oninput' to prevent duplicate listeners if this function is called multiple times
     yearFilter.onchange = applyFilters;
     platformFilter.onchange = applyFilters;
+    if (sortFilter) sortFilter.onchange = applyFilters;
     searchInput.oninput = applyFilters;
 }

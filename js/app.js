@@ -11,6 +11,7 @@ import { renderLandingPage } from './render-landing.js';
 export const appContainer = document.getElementById('app');
 export let masterProjectList = []; 
 export const views = {}; 
+let sliderIntervalId = null; // Track slider interval globally to prevent leaks
 
 // Determine base path for asset loading. Handles GitHub Pages deployment.
 // Use relative paths to ensure assets load correctly on both local server and GitHub Pages.
@@ -93,6 +94,12 @@ function router() {
     const path = window.location.hash.slice(1) || '/';
     window.scrollTo(0, 0); // Reset window scroll
     appContainer.scrollTop = 0; 
+
+    // Clear any active slider interval when navigating
+    if (sliderIntervalId) {
+        clearTimeout(sliderIntervalId);
+        sliderIntervalId = null;
+    }
 
     if (path.startsWith('/project/')) {
         const projectId = path.split('/')[2];
@@ -185,7 +192,11 @@ function initFeaturedSlider() {
     let currentIndex = 0;
     const slides = track.querySelectorAll('.slide-item');
     const totalSlides = slides.length;
-    let intervalId;
+    const normalInterval = 4000;
+    const slowInterval = 6000;
+    let isPaused = false;
+    let currentInterval = normalInterval;
+    let lastSlideTime = Date.now();
 
     const showSlide = (index) => {
         slides.forEach(s => s.classList.remove('active'));
@@ -193,21 +204,58 @@ function initFeaturedSlider() {
         currentIndex = index;
     };
 
-    const nextSlide = () => showSlide((currentIndex + 1) % totalSlides);
-    const prevSlide = () => showSlide((currentIndex - 1 + totalSlides) % totalSlides);
+    const scheduleNextSlide = () => {
+        if (sliderIntervalId) clearTimeout(sliderIntervalId);
+        if (isPaused) return;
+        
+        const elapsed = Date.now() - lastSlideTime;
+        const delay = Math.max(0, currentInterval - elapsed);
+        
+        sliderIntervalId = setTimeout(() => {
+            nextSlide();
+        }, delay);
+    };
+
+    const nextSlide = () => {
+        showSlide((currentIndex + 1) % totalSlides);
+        lastSlideTime = Date.now();
+        scheduleNextSlide();
+    };
+
+    const prevSlide = () => {
+        showSlide((currentIndex - 1 + totalSlides) % totalSlides);
+        lastSlideTime = Date.now();
+        scheduleNextSlide();
+    };
 
     // Controls
-    document.getElementById('slider-next').addEventListener('click', () => { nextSlide(); resetTimer(); });
-    document.getElementById('slider-prev').addEventListener('click', () => { prevSlide(); resetTimer(); });
+    document.getElementById('slider-next').addEventListener('click', nextSlide);
+    document.getElementById('slider-prev').addEventListener('click', prevSlide);
 
-    // Auto-play with pause on hover
-    const startTimer = () => { intervalId = setInterval(nextSlide, 5000); };
-    const resetTimer = () => { clearInterval(intervalId); startTimer(); };
+    // 1. General Hover: Slow down to 6s
+    sliderContainer.addEventListener('mouseenter', () => {
+        currentInterval = slowInterval;
+        scheduleNextSlide();
+    });
+    sliderContainer.addEventListener('mouseleave', () => {
+        currentInterval = normalInterval;
+        scheduleNextSlide();
+    });
+
+    // 2. Specific Interaction: Only pause on "View Details" button without resetting timer
+    const viewDetailsBtns = track.querySelectorAll('.slide-text a');
+    viewDetailsBtns.forEach(btn => {
+        btn.addEventListener('mouseenter', () => { 
+            isPaused = true; 
+            if (sliderIntervalId) clearTimeout(sliderIntervalId);
+        });
+        btn.addEventListener('mouseleave', () => { 
+            isPaused = false; 
+            scheduleNextSlide();
+        });
+    });
     
-    sliderContainer.addEventListener('mouseenter', () => clearInterval(intervalId));
-    sliderContainer.addEventListener('mouseleave', startTimer);
-    
-    startTimer();
+    scheduleNextSlide();
 }
 
 // Start the application

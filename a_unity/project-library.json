@@ -22,5 +22,9 @@
     {
         "id": "hl-machine-weima-wlk",
         "projectConfigPath": "++Hololens Project++/HL Machine WEIMA WLK/config.json"
+    },
+    { 
+        "id": "firefighter-prototype", 
+        "projectConfigPath": "++Android Project++/Firefghter Prototype/config.json" 
     }
 ]

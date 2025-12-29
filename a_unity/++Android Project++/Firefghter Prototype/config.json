@@ -1,0 +1,32 @@
+{
+    "title": "Firefighter Mobile Prototype",
+    "slug": "firefighter-prototype",
+    "tagline": "A high-performance simulation for fire safety training.",
+    "shortDescription": "An optimized Android firefighting simulation featuring FPS/TPS modes, event-driven audio, and lean physics systems for mobile efficiency.",
+    "previewImage": "./preview00.png",
+    "client": "Personal Project",
+    "platforms": ["Android", "iOS", "PC"],
+    "InitiationDate": "14-12-2025",
+    "DevStartDate": "16-12-2025",
+    "DevEndDate": "22-12-2025",
+    "techStack": ["Unity 6000", "C#", "URP", "Mobile Optimization"],
+    "media": [
+        { "url": "./preview00.png", "alt": "Main Hero Preview" },
+        { "url": "./preview01.png", "alt": "Gameplay View 1" },
+        { "url": "./preview02.png", "alt": "Gameplay View 2" },
+        { "url": "./preview03.png", "alt": "Gameplay View 3" },
+        { "url": "./preview04.png", "alt": "Gameplay View 4" }
+    ],
+    "externalLinks": [
+        { 
+            "label": "GitHub", 
+            "url": "https://github.com/sabbirahmedsr/firefighter-prototype", 
+            "iconClass": "fab fa-github" 
+        },
+        { 
+            "label": "GitLab", 
+            "url": "https://gitlab.com/sabbirahmedsr/firefighter-prototype", 
+            "iconClass": "fab fa-gitlab" 
+        }
+    ]
+}

@@ -5,7 +5,6 @@
     "shortDescription": "A Mixed Reality application for the HoloLens visualizing the WEIMA WLK shredder machine. This project allows users to inspect internal components and operational flows in 3D space.",
     "previewImage": "./preview02.png",
 
-    "client": "Personal Project",
     "platforms": ["HoloLens", "MR"],
     
     "InitiationDate": "01-01-2025",

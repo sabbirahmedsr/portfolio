@@ -1,4 +1,4 @@
-# 👨‍🚒 Firefighter Mobile Prototype
+# 👨‍🚒 Firefighter Prototype [FPS/TPS] [ANDROID/PC]
 
 This mobile project is a high-performance simulation designed to teach fire safety and how to use an extinguisher. By offering both First-Person (FPS) and Third-Person (TPS) modes, the gameplay provides a realistic way to practice putting out fires. It serves as an easy-to-use tool for learning life-saving skills through interactive action.
 

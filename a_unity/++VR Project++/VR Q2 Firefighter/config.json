@@ -1,13 +1,12 @@
 {
     "title": "VR Q2 Firefighter Simulator",
-    "slug": "vr-q2-firefighter",
+    "slug": "vr-q2-firefighter",    
     "tagline": "VR Training for Real Heroes",
     "shortDescription": "A VR training simulation for firefighters, built for the Meta Quest 2. This project provides a realistic environment to practice emergency procedures and equipment handling.",
-    "previewImage": "./preview.png",    
-
-    "client": "Training Solutions Inc.", 
-    "platforms": ["Meta Quest", "VR"],
     
+    "previewImage": "./preview.png",  
+    "platforms": ["Meta Quest", "VR"],
+
     "InitiationDate": "15-01-2023",
     "DevStartDate": "01-02-2023",
     "DevEndDate": "10-04-2023",

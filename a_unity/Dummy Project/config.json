@@ -5,7 +5,6 @@
     "shortDescription": "1-2 sentence summary for Quick Look and detail page intro.",
     "previewImage": "./preview.png",
 
-    "client": "AZMI STUDIO", 
     "platforms": [
         "Windows",
         "HoloLens"

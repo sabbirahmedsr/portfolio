@@ -67,6 +67,38 @@
     border-color: var(--color-secondary-accent);
 }
 
+/* --- Thumbnail Video Overlay --- */
+.detail-thumbnail-item .video-overlay {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 36px;
+    height: 25px;
+    background-color: #FF0000; /* YouTube Red */
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 5;
+    pointer-events: none;
+    transition: transform 0.2s ease;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.3)
+}
+
+.detail-thumbnail-item:hover .video-overlay {
+    transform: translate(-50%, -50%) scale(1.1);
+}
+
+.detail-thumbnail-item .video-overlay::after {
+    content: '';
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-width: 6px 0 6px 10px;
+    border-color: transparent transparent transparent white;
+}
+
 /* --- Info Sidebar (Right Column) --- */
 .detail-info-sidebar {
     /* Explicitly place sidebar in column 2 and make it span 2 rows */
@@ -111,6 +143,7 @@
 .sidebar-summary {
     font-size: 0.9rem;
     color: var(--color-text-light);
+    text-align: justify;
 }
 
 .sidebar-specs {

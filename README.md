@@ -149,7 +149,6 @@ Create a new folder inside the category directory (e.g., `a_unity/MyNewGame/`). 
     "tagline": "A short catchy tagline.",
     "shortDescription": "Brief summary for the card view.",
     "previewImage": "./preview.png",
-    "client": "Personal Project",
     "platforms": ["PC", "WebGL"],
     "InitiationDate": "01-01-2024",
     "DevStartDate": "01-02-2024",

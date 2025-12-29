@@ -44,8 +44,7 @@ export async function renderDetailView(projectId) {
             { label: 'Initiation Date', value: formatDateLong(parseDate(projectConfig.InitiationDate)) },
             { label: 'Start Date', value: formatDateLong(parseDate(projectConfig.DevStartDate)) },
             { label: 'End Date', value: formatDateLong(parseDate(projectConfig.DevEndDate)) },
-            { label: 'Platform(s)', value: projectConfig.platforms.join(', ') },
-            { label: 'Client', value: projectConfig.client }
+            { label: 'Platform(s)', value: projectConfig.platforms.join(', ') }
         ];
         specsData.forEach(item => {
             if (item.value && item.value !== 'N/A') {

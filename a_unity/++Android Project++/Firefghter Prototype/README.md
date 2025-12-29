@@ -37,6 +37,19 @@ A high-performance, event-driven firefighting simulation developed for Android. 
 * Language: C#
 * Platform: Android, IOS, PC
 
+### ⚙️ **Packages & Dependencies**
+The following specific versions were used to ensure stability and performance on mobile:
+
+| Package Name | Version | Description |
+| :--- | :--- | :--- |
+| `Universal RP` | 17.2.0 | High-performance graphics pipeline for mobile. |
+| `Input System` | 1.14.2 | Advanced cross-platform input handling. |
+| `Burst Compiler` | 1.8.25 | LLVM-based backend for highly optimized C# code. |
+| `Unity Mathematics` | 1.3.2 | SIMD-friendly math for physics and performance. |
+| `Timeline` | 1.8.9 | Narrative and cinematic sequencing tools. |
+| `TextMeshPro` | 3.0.9 | High-fidelity SDF text rendering. |
+| `Unity Collections` | 2.5.7 | Native memory management for high-speed logic. |
+
 ---
 
 ## 📖 How to Play

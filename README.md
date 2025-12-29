@@ -104,17 +104,17 @@ Short catchy and engaging description of the project
 ## 🛠️ Technical Details
 
 * Engine: **[Unity xxxx.x.xxf1]**
-* Render Pipeline: **[Built-in / URP / HDRP]]**
+* Render Pipeline: **[Built-in / URP / HDRP]**
 * Language: [C# / C++]
 * Platform: [PC / ANDROID / IOS / WEB / HOLOLENS / VR / QUEST]
 
+---
 
 ### ⚙️ **Packages & Dependencies**
-The following specific versions were used to ensure stability:
 
-| Package Name | Version |
-| :--- | :--- |
-| `package.name` | x.x.x |
+| Package Name | Version | Description |
+| :--- | :--- | :--- |
+| `package.name` | x.x.x | Description of the package | 
 
 ---
 
@@ -143,26 +143,38 @@ Create a new folder inside the category directory (e.g., `a_unity/MyNewGame/`). 
 
 **Step 2: Sample `config.json`**
 ```json
+
 {
     "title": "My New Game",
     "slug": "my-new-game",
     "tagline": "A short catchy tagline.",
     "shortDescription": "Brief summary for the card view.",
-    "previewImage": "./preview.png",
+
+    "previewImage": "./preview00.png",
     "platforms": ["PC", "WebGL"],
-    "InitiationDate": "01-01-2024",
-    "DevStartDate": "01-02-2024",
-    "DevEndDate": "01-03-2024",
-    "techStack": ["Unity", "C#", "HLSL"],
+
+    "InitiationDate": "dd-mm-yyyy",
+    "DevStartDate": "dd-mm-yyyy",
+    "DevEndDate": "dd-mm-yyyy",
+
+    "unityVersion": "xxxx.x.xxfx",
+    "techStack": ["Unity", "C#", "URP", "TextMeshPro"],
+    
     "media": [
-        { "url": "./preview.png", "alt": "Main cover" },
-        { "url": "https://youtube.com/...", "alt": "Gameplay Trailer" }
-    ],
+        { "url": "./preview00.png", "alt": "Main App Preview" },
+        { "url": "https://youtu.be/[VIDEO_ID]", "alt": "Gameplay V1" },
+        { "url": "./preview01.png", "alt": "Preview 01" },
+        { "url": "./preview02.png", "alt": "Preview 02" },
+        { "url": "./preview03.png", "alt": "Preview 03" },
+        { "url": "./preview04.png", "alt": "Preview 04" }
+    ],   
+
     "externalLinks": [
         { "label": "GitHub", "url": "...", "iconClass": "fab fa-github" },
         { "label": "GitLab", "url": "...", "iconClass": "fab fa-gitlab" }
     ]
 }
+
 ```
 
 **Step 3: Register the Project**

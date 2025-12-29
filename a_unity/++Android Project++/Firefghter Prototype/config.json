@@ -3,12 +3,17 @@
     "slug": "firefighter-prototype",
     "tagline": "A high-performance simulation for fire safety training.",
     "shortDescription": "An optimized Android firefighting simulation featuring FPS/TPS modes, event-driven audio, and lean physics systems for mobile efficiency.",
+    
     "previewImage": "./preview00.png",
     "platforms": ["Android", "iOS", "PC"],
+
     "InitiationDate": "14-12-2025",
     "DevStartDate": "16-12-2025",
     "DevEndDate": "22-12-2025",
+
+    "unityVersion": "6000.2.8f1",
     "techStack": ["Unity 6 (6000.2.8f1)", "URP 17.2.0", "C#", "New Input System", "Burst Compiler", "Unity Mathematics", "Timeline", "TextMeshPro", "SRP Core", "Event-Driven Architecture", "Async/Await"],
+    
     "media": [
         { "url": "./preview00.png", "alt": "Main Hero Preview" },
         { "url": "https://youtu.be/nuTXMFoDBeg", "alt": "Gameplay V1" },
@@ -17,6 +22,7 @@
         { "url": "./preview03.png", "alt": "Gameplay View 3" },
         { "url": "./preview04.png", "alt": "Gameplay View 4" }
     ],
+    
     "externalLinks": [
         { 
             "label": "GitHub", 

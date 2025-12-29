@@ -34,7 +34,15 @@ Copy and adapt this template for your project:
 ````markdown
 
 # [Project Title]
-Short description of the project
+
+Short catchy and engaging description of the project
+
+---
+
+## 🔗 Quick Links
+
+| [Github](https://github.com/sabbirahmedsr/[SLUG]) | [Gitlab](https://gitlab.com/sabbirahmedsr/[SLUG]) | [Info](./Assets/Info) | [Portfolio](https://sabbirahmedsr.github.io/portfolio/#/project/[SLUG]) | [Publish]([Publish-URL]) |
+| :---: | :---: | :---: | :---: | :---: |
 
 ---
 
@@ -66,22 +74,16 @@ Short description of the project
 </p>
 
 ### 🎬 Gameplay
-<!-- Option 1: Standard Markdown Video (Full Width/Native) -->
-[![Video Title](https://img.youtube.com/vi/[VideoID]/0.jpg)](https://www.youtube.com/watch?v=[VideoID])
+[![Gameplay V1](https://img.youtube.com/vi/[VideoID]/sddefault.jpg)](https://www.youtube.com/watch?v=[VideoID])
+> **[▶ Click here to watch the gameplay video](https://www.youtube.com/watch?v=[VideoID])**
+
 
 <!-- Option 2: Centered Video with 60% Width -->
 <p align="center">
   <a href="https://www.youtube.com/watch?v=[VideoID]">
-    <img src="https://img.youtube.com/vi/[VideoID]/0.jpg" width="60%" alt="Video Title">
+    <img src="https://img.youtube.com/vi/[VideoID]/sddefault.jpg" width="60%" alt="Video Title">
   </a>
 </p>
-
----
-
-## 🔗 Quick Links
-
-| [GitHub]([project-repository-url]) | [GitLab]([project-repository-url]) | [Attribution](./Assets/Info/Attribute.md) | [Requirements](./Assets/Info/Requirement.md) |
-| :---: | :---: | :---: | :---: |
 
 ---
 
@@ -89,7 +91,7 @@ Short description of the project
 
 | Proposal Discussion | Project Start | Project Completion | Duration |
 | :---: | :---: | :---: | :---: |
-| [Month Day, Year] | **[Month Day, Year]** | [Month Day, Year] | [Duration] |
+| Month Day, Year | **Month Day, Year** | Month Day, Year | Duration |
 
 ---
 
@@ -113,6 +115,17 @@ The following specific versions were used to ensure stability:
 | Package Name | Version |
 | :--- | :--- |
 | `package.name` | x.x.x |
+
+---
+
+## 🏷️ Attribution
+
+* **Category:** [Asset Name](URL)(Author), [Asset Name](URL)(Author)
+* **Category:** [Asset Name](URL)(Author), [Asset Name](URL)(Author)
+* **Category:** [Asset Name](URL)(Author), [Asset Name](URL)(Author)
+
+*Full details can be found in the [Attribution File](./Assets/Info/Attribute.md).*
+
 
 ````
 
